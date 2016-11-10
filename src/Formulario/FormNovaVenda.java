@@ -24,7 +24,9 @@ public class FormNovaVenda extends javax.swing.JFrame {
     
     private FormConsultaProduto Frm;
     private Produto produtoAtual;
-
+    ArrayList<ItemVenda> listaItem = new ArrayList<ItemVenda>();
+    double valorTotal=0;
+    
     /**
      * Creates new form FormNovaVenda
      */
@@ -67,7 +69,7 @@ public class FormNovaVenda extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CashFlow - Nova Venda");
 
-        txtQuantidadeProduto.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        txtQuantidadeProduto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel2.setText("Código:");
@@ -77,7 +79,7 @@ public class FormNovaVenda extends javax.swing.JFrame {
         txtCupom.setFocusable(false);
         jScrollPane1.setViewportView(txtCupom);
 
-        txtCodProduto.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        txtCodProduto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel4.setText("Descrição:");
@@ -86,12 +88,12 @@ public class FormNovaVenda extends javax.swing.JFrame {
         btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/btnSalvar.png"))); // NOI18N
         btnSalvar.setText("Finalizar Venda");
 
-        txtDescricaoProduto.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        txtDescricaoProduto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setText("Quantidade:");
 
-        txtValorPago.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        txtValorPago.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel6.setText("Valor total:");
@@ -126,10 +128,12 @@ public class FormNovaVenda extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel5.setText("Troco:");
 
+        txtValorTotal.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+
         jLabel8.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel8.setText("Valor pago:");
 
-        txtValorTotal1.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        txtValorTotal1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
 
         btnConsulta.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnConsulta.setText("F1 Consulta Produtos");
@@ -258,21 +262,24 @@ public class FormNovaVenda extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     
-   
-    private void btnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirActionPerformed
+    public void adicionaItem(){
+    
         
-        double valorTotal=0;
         ItemVenda itemVenda = new ItemVenda();
         itemVenda.setProduto(produtoAtual);
         itemVenda.setQuantidade(Integer.parseInt(txtQuantidadeProduto.getText()));
-        ArrayList<ItemVenda> listaItem = new ArrayList<ItemVenda>();
         listaItem.add(itemVenda);
-        valorTotal += ((Integer.parseInt(txtQuantidadeProduto.getText())) * produtoAtual.getPrecoVenda()); 
+        valorTotal += ((Integer.parseInt(txtQuantidadeProduto.getText())) * produtoAtual.getPrecoVenda());
         txtValorTotal.setText(String.valueOf(valorTotal));
+    
+    }     
+   
+    private void btnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirActionPerformed
+        
+        adicionaItem();
         jTItemVenda.setModel(new ItemVendaModel(listaItem));
         jTItemVenda.repaint();
-       
-        
+         
     }//GEN-LAST:event_btnIncluirActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
