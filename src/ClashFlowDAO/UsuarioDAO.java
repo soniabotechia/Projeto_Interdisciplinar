@@ -18,7 +18,7 @@ import utilitario.Conexao;
 
 /**
  *
- * @author Italo
+ * @author Italo Molina
  */
 public class UsuarioDAO {
     private Connection conn;
