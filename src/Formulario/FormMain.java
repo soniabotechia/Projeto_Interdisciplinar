@@ -53,6 +53,7 @@ public class FormMain extends javax.swing.JFrame {
         setTitle("Cash Flow");
         setBackground(new java.awt.Color(0, 51, 51));
         setName("Cash Flow"); // NOI18N
+        setResizable(false);
 
         btnVendas1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnVendas1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/1478230016_empty-shopping-cart.png"))); // NOI18N
