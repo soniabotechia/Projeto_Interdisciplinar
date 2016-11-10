@@ -57,15 +57,13 @@ public class FormAlterarProduto extends javax.swing.JFrame {
         jTextField9 = new javax.swing.JTextField();
         jTextField10 = new javax.swing.JTextField();
         jTextField11 = new javax.swing.JTextField();
-        jTextField12 = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
         jTextField13 = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
-        jLabel26 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jTextField14 = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
@@ -201,23 +199,21 @@ public class FormAlterarProduto extends javax.swing.JFrame {
         jTextField11.setText("79,90");
         ABAS3.add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 80, -1));
 
-        jTextField12.setText("jTextField1");
-        ABAS3.add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 150, -1));
-
+        jLabel9.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel9.setText("Descrição:");
         ABAS3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, -1, -1));
 
+        jLabel10.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel10.setText("Quantidade:");
-        ABAS3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, -1, -1));
+        ABAS3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, -1, -1));
 
+        jLabel11.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel11.setText("Observação:");
-        ABAS3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, -1, -1));
+        ABAS3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, -1, -1));
 
+        jLabel12.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel12.setText("Preço Venda:");
-        ABAS3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, -1, -1));
-
-        jLabel14.setText("Grupo de Produto:");
-        ABAS3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, -1, 20));
+        ABAS3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, -1, -1));
 
         jTextField13.setText("jTextField1");
         ABAS3.add(jTextField13, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 150, -1));
@@ -226,19 +222,23 @@ public class FormAlterarProduto extends javax.swing.JFrame {
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/MAIS.png"))); // NOI18N
         ABAS3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 270, 30, 20));
 
-        jLabel26.setText("Grupo de Produto:");
-        ABAS3.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, -1, 20));
+        jLabel14.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel14.setText("Grupo de Produto:");
+        ABAS3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, -1, 20));
 
+        jLabel15.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel15.setText("Preço de Compra:");
 
         jTextField14.setText("49,80");
 
+        jButton4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/btnSalvar.png"))); // NOI18N
         jButton4.setText("Salvar");
 
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/product.png"))); // NOI18N
 
-        jLabel27.setText("Dada de Cadastro");
+        jLabel27.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel27.setText("Dada de Cadastro:");
 
         jLabel28.setText("13/10/2016");
         jLabel28.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -247,13 +247,6 @@ public class FormAlterarProduto extends javax.swing.JFrame {
         ABAS2.setLayout(ABAS2Layout);
         ABAS2Layout.setHorizontalGroup(
             ABAS2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ABAS2Layout.createSequentialGroup()
-                .addComponent(ABAS3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
-                .addComponent(jLabel27)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel28)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ABAS2Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(ABAS2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -263,7 +256,7 @@ public class FormAlterarProduto extends javax.swing.JFrame {
                                 .addGap(250, 250, 250)
                                 .addComponent(jLabel2))
                             .addGroup(ABAS2Layout.createSequentialGroup()
-                                .addGap(64, 64, 64)
+                                .addGap(31, 31, 31)
                                 .addComponent(jLabel15)
                                 .addGap(18, 18, 18)
                                 .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -273,6 +266,13 @@ public class FormAlterarProduto extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ABAS2Layout.createSequentialGroup()
                         .addComponent(jButton4)
                         .addGap(209, 209, 209))))
+            .addGroup(ABAS2Layout.createSequentialGroup()
+                .addComponent(ABAS3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addComponent(jLabel27)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel28)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         ABAS2Layout.setVerticalGroup(
             ABAS2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -289,13 +289,13 @@ public class FormAlterarProduto extends javax.swing.JFrame {
                     .addGroup(ABAS2Layout.createSequentialGroup()
                         .addGap(108, 108, 108)
                         .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(37, 37, 37)
+                .addGap(43, 43, 43)
                 .addGroup(ABAS2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
-                    .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton4)
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -303,9 +303,8 @@ public class FormAlterarProduto extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(ABAS2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(ABAS2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -554,7 +553,6 @@ public class FormAlterarProduto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
@@ -571,7 +569,6 @@ public class FormAlterarProduto extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
     private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField14;
     private javax.swing.JTextField jTextField15;

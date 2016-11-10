@@ -58,7 +58,7 @@ public class FormConsultaProduto extends javax.swing.JFrame {
             }
         });
 
-        JtConsultaProdutos.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        JtConsultaProdutos.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         JtConsultaProdutos.setModel(new ProdutoTableModel());
         JtConsultaProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -60,7 +61,7 @@ public class FormNovoLancamentosCaixa extends javax.swing.JFrame {
         jLabel1.setText("Novo Lançamento Caixa");
 
         jLabel9.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel9.setText("Tipo do Movimento");
+        jLabel9.setText("Tipo do Movimento:");
 
         CBFormaPagamento.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         CBFormaPagamento.setModel(new javax.swing.DefaultComboBoxModel<FormaPagamento>(carregaFormas()));
@@ -73,10 +74,10 @@ public class FormNovoLancamentosCaixa extends javax.swing.JFrame {
         txtobservacao.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel2.setText("Observações");
+        jLabel2.setText("Observações:");
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel3.setText("Valor do Movimento");
+        jLabel3.setText("Valor do Movimento:");
 
         txtValorLancamento.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
 
@@ -89,7 +90,7 @@ public class FormNovoLancamentosCaixa extends javax.swing.JFrame {
         });
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel4.setText("Forma de Pagamento ou Recebimento");
+        jLabel4.setText("Forma de Pagamento ou Recebimento:");
 
         btnSalvarNovoLancamento.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnSalvarNovoLancamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/btnSalvar.png"))); // NOI18N
@@ -131,7 +132,7 @@ public class FormNovoLancamentosCaixa extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(49, 49, 49)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE)
                 .addGap(50, 50, 50))
             .addGroup(layout.createSequentialGroup()
                 .addGap(38, 38, 38)
@@ -215,28 +216,39 @@ public class FormNovoLancamentosCaixa extends javax.swing.JFrame {
     }
     
     private void btnSalvarNovoLancamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarNovoLancamentoActionPerformed
-        
+        int aux = 0;
         LancamentosCaixa lc = new LancamentosCaixa();
         
         lc.setFormaPagamento((FormaPagamento) CBFormaPagamento.getSelectedItem());
         lc.setTipoMovimento((TipoMovimento)cbNovoMovimento.getSelectedItem());
         lc.setObservacao(txtobservacao.getText());
         lc.setValorMovimento(Double.parseDouble(txtValorLancamento.getText()));
-        
-       
-        try {
-            LancamentosCaixaBO LancamentosCaixaBO= new LancamentosCaixaBO();
-            LancamentosCaixaBO.salvar(lc);
-        } catch (CaixaFechadoException ex) {
-            Logger.getLogger(FormNovoLancamentosCaixa.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (DAOException ex) {
-            Logger.getLogger(FormNovoLancamentosCaixa.class.getName()).log(Level.SEVERE, null, ex);
+        aux = validacao(evt);
+        if(aux == 0){
+            try {
+                LancamentosCaixaBO LancamentosCaixaBO= new LancamentosCaixaBO();
+                LancamentosCaixaBO.salvar(lc);
+                JOptionPane.showMessageDialog(null,"Novo movimento salvo com sucesso!");
+                btnSairActionPerformed(evt);
+                } catch (CaixaFechadoException ex) {
+                  Logger.getLogger(FormNovoLancamentosCaixa.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (DAOException ex) {
+                  Logger.getLogger(FormNovoLancamentosCaixa.class.getName()).log(Level.SEVERE, null, ex);
+                 }
         }
         
         
-        
     }//GEN-LAST:event_btnSalvarNovoLancamentoActionPerformed
-
+    private int validacao (java.awt.event.ActionEvent evt)
+    {
+        int erro = 0;
+        if(txtValorLancamento.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null,"Erro.Insira o valor do movimento!");
+            erro++;
+        }
+        return erro;
+    }
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         this.dispose(); //Comando utilizado para encerrar o formulário sem encerrar a aplicação.
     }//GEN-LAST:event_btnSairActionPerformed

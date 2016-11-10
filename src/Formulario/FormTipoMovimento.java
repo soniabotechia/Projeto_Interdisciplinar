@@ -50,7 +50,7 @@ public class FormTipoMovimento extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 1, 40)); // NOI18N
         jLabel1.setText("     Tipo de movimento");
 
-        btnNovoMovimento.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnNovoMovimento.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnNovoMovimento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/btnNovo.png"))); // NOI18N
         btnNovoMovimento.setText("Novo");
         btnNovoMovimento.setPreferredSize(new java.awt.Dimension(60, 60));
@@ -60,7 +60,7 @@ public class FormTipoMovimento extends javax.swing.JFrame {
             }
         });
 
-        btnAlterarMovimento.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnAlterarMovimento.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnAlterarMovimento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/btnAlterar.png"))); // NOI18N
         btnAlterarMovimento.setText("Alterar");
         btnAlterarMovimento.addActionListener(new java.awt.event.ActionListener() {
@@ -69,7 +69,7 @@ public class FormTipoMovimento extends javax.swing.JFrame {
             }
         });
 
-        btnExcluirMovimento.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnExcluirMovimento.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnExcluirMovimento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/btnExcluir.png"))); // NOI18N
         btnExcluirMovimento.setText("Excluir");
         btnExcluirMovimento.addActionListener(new java.awt.event.ActionListener() {

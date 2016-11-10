@@ -10,6 +10,7 @@ import ClashFlowObjeto.Caixa;
 import exception.DAOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 /**
@@ -39,6 +40,7 @@ public class FormCaixa extends javax.swing.JFrame {
         txtValorCaixa = new javax.swing.JTextField();
         btnAbrirCaixa = new javax.swing.JButton();
         btnFecharCaixa = new javax.swing.JButton();
+        btnSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -47,7 +49,7 @@ public class FormCaixa extends javax.swing.JFrame {
         jLabel1.setText("Caixa");
 
         jLabel9.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel9.setText("Valor de abertura");
+        jLabel9.setText("Valor de abertura:");
 
         txtValorCaixa.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         txtValorCaixa.addActionListener(new java.awt.event.ActionListener() {
@@ -74,6 +76,15 @@ public class FormCaixa extends javax.swing.JFrame {
             }
         });
 
+        btnSair.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/btnSair.png"))); // NOI18N
+        btnSair.setText("Sair");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -82,17 +93,21 @@ public class FormCaixa extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnAbrirCaixa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnFecharCaixa)
-                            .addComponent(txtValorCaixa, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(17, 17, 17)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(43, 43, 43)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(btnAbrirCaixa)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtValorCaixa, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnFecharCaixa))
+                        .addGap(36, 36, 36)
+                        .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -107,7 +122,8 @@ public class FormCaixa extends javax.swing.JFrame {
                 .addGap(102, 102, 102)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAbrirCaixa)
-                    .addComponent(btnFecharCaixa, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnFecharCaixa, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(68, Short.MAX_VALUE))
         );
 
@@ -119,11 +135,19 @@ public class FormCaixa extends javax.swing.JFrame {
 
         Caixa cx = new Caixa();
         cx.setValorAbertura(Double.parseDouble(txtValorCaixa.getText()));
+        if(txtValorCaixa.getText().isEmpty()){
+             showMessageDialog(null,"Digite o valor da entrada!") ;
+            
+        }
+        else{
         CaixaBO caixaBO = new CaixaBO();
         try {
             caixaBO.AberturaCaixa(cx);
+            showMessageDialog(null,"Caixa aberto com sucesso");
+            btnSairActionPerformed(evt);
         } catch (DAOException ex) {
-           showMessageDialog(null,"Não foi possivel abrir caixa!") ;
+           showMessageDialog(null,"Não foi possivel abrir caixa!");
+        }
         }
     }//GEN-LAST:event_btnAbrirCaixaActionPerformed
 
@@ -134,6 +158,10 @@ public class FormCaixa extends javax.swing.JFrame {
     private void txtValorCaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValorCaixaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtValorCaixaActionPerformed
+
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        this.dispose(); //Comando utilizado para encerrar o formulário sem encerrar a aplicação.
+    }//GEN-LAST:event_btnSairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -173,6 +201,7 @@ public class FormCaixa extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAbrirCaixa;
     private javax.swing.JButton btnFecharCaixa;
+    private javax.swing.JButton btnSair;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField txtValorCaixa;
