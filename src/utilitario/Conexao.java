@@ -16,9 +16,9 @@ import java.sql.SQLException;
 public class Conexao 
 {
     final private String driver = "com.mysql.jdbc.Driver";
-    final private String url = "jdbc:mysql://localhost:3305/CashFlow";
+    final private String url = "jdbc:mysql://localhost:3306/cashflow";
     final private String usuario = "root";
-    final private String senha = "root";
+    final private String senha = "";
     
     public Connection conectar() throws SQLException
     {
