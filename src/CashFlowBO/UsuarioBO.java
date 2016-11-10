@@ -19,7 +19,7 @@ import utilitario.Conexao;
 
 /**
  *
- * @author Italo
+ * @author Italo Molina
  */
 public class UsuarioBO {
     UsuarioDAO usuarioDAO;
