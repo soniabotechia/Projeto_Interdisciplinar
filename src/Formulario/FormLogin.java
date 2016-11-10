@@ -195,11 +195,11 @@ public class FormLogin extends javax.swing.JFrame {
         if (resultado == 1)
         {
             logado = true;
-            
-            FormPrincipal formP = new FormPrincipal(); //Instanciação do formulário principal
+          
+            FormMain formP = new FormMain(); //Instanciação do formulário principal
             formP.setVisible(true);
             
-            this.dispose();
+           this.dispose();
         }
         else
         {
