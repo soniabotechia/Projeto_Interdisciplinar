@@ -46,38 +46,8 @@ public class UsuarioBO {
     public int logarUsu(Usuario u){
         int logado = 0;
         
-        String usuario = null;
-        String senha = null;
-        
-        try {
-            conn = new Conexao().conectar();
- 
-            //Executa a query de seleção
-            java.sql.Statement st = conn.createStatement();
-            st.executeQuery("select * from usuario where " +
-                   " usuNome = '" + u.getUsuario() + "'" +
-                   " and usuSenha = '" + u.getSenha() + "'");
-            ResultSet rs = st.getResultSet();
- 
-            //Lista os alunos no console
-            while (rs.next()) {
-                usuario = rs.getString("usuNome");
-                senha = rs.getString("usuSenha");
-                
-                System.out.print(usuario + " ");
-                System.out.println(senha);
-                
-                if(usuario.equals(u.getUsuario()) && senha.equals(u.getSenha()))
-                    logado = 1;
-            }
+        logado = usuarioDAO.logarUsu(u);
            
-            conn.close();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
-        }//Fim try
-        
-        
-                
         return logado;
     }
 }
