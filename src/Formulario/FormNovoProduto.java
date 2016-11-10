@@ -106,7 +106,7 @@ public class FormNovoProduto extends javax.swing.JFrame {
             }
         });
         ABAS1.add(CBGrupoProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 120, 20));
-        ABAS1.add(txtPrecoCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 300, 80, -1));
+        ABAS1.add(txtPrecoCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, 80, -1));
         ABAS1.add(txtQuantidadeProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 150, 20));
         ABAS1.add(txtObservacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 250, -1));
 
@@ -115,8 +115,8 @@ public class FormNovoProduto extends javax.swing.JFrame {
                 txtEstoqueActionPerformed(evt);
             }
         });
-        ABAS1.add(txtEstoque, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, 80, -1));
-        ABAS1.add(txtLocal, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, 80, -1));
+        ABAS1.add(txtEstoque, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 220, 80, -1));
+        ABAS1.add(txtLocal, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 250, 80, -1));
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setText("Descrição:");
@@ -128,7 +128,7 @@ public class FormNovoProduto extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel5.setText("Observação:");
-        ABAS1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, -1, -1));
+        ABAS1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, -1, 20));
 
         jLabel13.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel13.setText("Grupo de Produto:");
@@ -146,29 +146,31 @@ public class FormNovoProduto extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel7.setText("Preço de Compra:");
-        ABAS1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, -1, -1));
+        ABAS1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel6.setText("Preço Venda:");
-        ABAS1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 330, -1, -1));
-        ABAS1.add(txtPrecoVenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 330, 84, -1));
+        ABAS1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 310, -1, -1));
+        ABAS1.add(txtPrecoVenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 310, 80, -1));
 
         jLabel18.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel18.setText("Estoque:");
-        ABAS1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, -1, -1));
+        ABAS1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, -1, -1));
 
         jLabel19.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel19.setText("Local:");
-        ABAS1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, -1, -1));
+        ABAS1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 250, -1, -1));
 
         btnSalvar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/btnSalvar.png"))); // NOI18N
         btnSalvar.setText("Salvar");
+        btnSalvar.setBorderPainted(false);
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalvarActionPerformed(evt);
             }
         });
+        ABAS1.add(btnSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 360, -1, 41));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/product.png"))); // NOI18N
 
@@ -190,9 +192,7 @@ public class FormNovoProduto extends javax.swing.JFrame {
                 .addComponent(ABAS1, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(ABASLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ABASLayout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(btnSalvar)
-                        .addGap(45, 45, 45)
+                        .addGap(166, 166, 166)
                         .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(136, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ABASLayout.createSequentialGroup()
@@ -214,9 +214,7 @@ public class FormNovoProduto extends javax.swing.JFrame {
                     .addGroup(ABASLayout.createSequentialGroup()
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(143, 143, 143)
-                        .addGroup(ABASLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSair)))
+                        .addComponent(btnSair))
                     .addComponent(ABAS1, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
