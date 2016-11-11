@@ -5,6 +5,7 @@
  */
 package Formulario;
 
+import ClashFlowObjeto.Usuario;
 import static java.awt.SystemColor.text;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -31,6 +32,11 @@ public class FormMain extends javax.swing.JFrame {
        
        
     }
+
+    /*FormMain(Usuario u) {
+        lblUsuario.setText(u.getUsuario());
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }*/
 
     /**
      * This method is called from within the constructor to initialize the form.

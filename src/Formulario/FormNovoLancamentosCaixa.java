@@ -216,15 +216,15 @@ public class FormNovoLancamentosCaixa extends javax.swing.JFrame {
     }
     
     private void btnSalvarNovoLancamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarNovoLancamentoActionPerformed
-        int aux = 0;
+      
         LancamentosCaixa lc = new LancamentosCaixa();
         
         lc.setFormaPagamento((FormaPagamento) CBFormaPagamento.getSelectedItem());
         lc.setTipoMovimento((TipoMovimento)cbNovoMovimento.getSelectedItem());
         lc.setObservacao(txtobservacao.getText());
         lc.setValorMovimento(Double.parseDouble(txtValorLancamento.getText()));
-        aux = validacao(evt);
-        if(aux == 0){
+       
+       
             try {
                 LancamentosCaixaBO LancamentosCaixaBO= new LancamentosCaixaBO();
                 LancamentosCaixaBO.salvar(lc);
@@ -234,21 +234,13 @@ public class FormNovoLancamentosCaixa extends javax.swing.JFrame {
                   Logger.getLogger(FormNovoLancamentosCaixa.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (DAOException ex) {
                   Logger.getLogger(FormNovoLancamentosCaixa.class.getName()).log(Level.SEVERE, null, ex);
-                 }
-        }
+               }
+        
         
         
     }//GEN-LAST:event_btnSalvarNovoLancamentoActionPerformed
-    private int validacao (java.awt.event.ActionEvent evt)
-    {
-        int erro = 0;
-        if(txtValorLancamento.getText().isEmpty())
-        {
-            JOptionPane.showMessageDialog(null,"Erro.Insira o valor do movimento!");
-            erro++;
-        }
-        return erro;
-    }
+    
+    
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         this.dispose(); //Comando utilizado para encerrar o formulário sem encerrar a aplicação.
     }//GEN-LAST:event_btnSairActionPerformed
