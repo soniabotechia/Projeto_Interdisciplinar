@@ -18,7 +18,7 @@ public class Venda {
     private Calendar data;
     private int quantidade;
     private double totalVenda;
-    private List Itemvenda;
+    private List<ItemVenda> Itemvenda ;
     private FormaPagamento pagamento;
 
     public List getItemvenda() {

@@ -11,6 +11,7 @@ import CashFlowBO.FormaPagamentoBO;
 import ClashFlowObjeto.FormaPagamento;
 import ClashFlowObjeto.ItemVenda;
 import ClashFlowObjeto.Produto;
+import ClashFlowObjeto.Venda;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
@@ -70,13 +71,13 @@ public class FormNovaVenda extends javax.swing.JFrame {
         txtCupom = new javax.swing.JTextArea();
         txtCodProduto = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        btnSalvar = new javax.swing.JButton();
+        btnFimVenda = new javax.swing.JButton();
         txtDescricaoProduto = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         btnIncluir = new javax.swing.JButton();
-        txtFormaPagamento = new javax.swing.JComboBox<>();
+        cBFormaPagamento = new javax.swing.JComboBox<>();
         btnCancelar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTItemVenda = new javax.swing.JTable();
@@ -84,18 +85,13 @@ public class FormNovaVenda extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         btnConsulta = new javax.swing.JButton();
         txtTroco = new JFormattedTextField(getFormatoMoeda());
-        txtValorTotal1 = new JFormattedTextField(getFormatoMoeda());
-        txtValorPago1 = new JFormattedTextField(getFormatoMoeda());
+        txtValorTotal = new JFormattedTextField(getFormatoMoeda());
+        txtValorPago = new JFormattedTextField(getFormatoMoeda());
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CashFlow - Nova Venda");
 
         txtQuantidadeProduto.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
-        txtQuantidadeProduto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtQuantidadeProdutoActionPerformed(evt);
-            }
-        });
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel2.setText("Código:");
@@ -110,12 +106,12 @@ public class FormNovaVenda extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel4.setText("Descrição:");
 
-        btnSalvar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/btnSalvar.png"))); // NOI18N
-        btnSalvar.setText("Finalizar Venda");
-        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+        btnFimVenda.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnFimVenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/btnSalvar.png"))); // NOI18N
+        btnFimVenda.setText("Finalizar Venda");
+        btnFimVenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalvarActionPerformed(evt);
+                btnFimVendaActionPerformed(evt);
             }
         });
 
@@ -139,8 +135,8 @@ public class FormNovaVenda extends javax.swing.JFrame {
             }
         });
 
-        txtFormaPagamento.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        txtFormaPagamento.setModel(new javax.swing.DefaultComboBoxModel<FormaPagamento>(carregaFormas()));
+        cBFormaPagamento.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        cBFormaPagamento.setModel(new javax.swing.DefaultComboBoxModel<FormaPagamento>(carregaFormas()));
 
         btnCancelar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/btnExcluir.png"))); // NOI18N
@@ -171,17 +167,17 @@ public class FormNovaVenda extends javax.swing.JFrame {
 
         txtTroco.setText(null);
         txtTroco.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        txtTroco.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTrocoActionPerformed(evt);
+
+        txtValorTotal.setText(null);
+        txtValorTotal.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+
+        txtValorPago.setText(null);
+        txtValorPago.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        txtValorPago.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtValorPagoFocusLost(evt);
             }
         });
-
-        txtValorTotal1.setText(null);
-        txtValorTotal1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-
-        txtValorPago1.setText(null);
-        txtValorPago1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -229,15 +225,15 @@ public class FormNovaVenda extends javax.swing.JFrame {
                                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtValorPago1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtValorTotal1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtValorPago, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtTroco, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(38, 38, 38)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtFormaPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cBFormaPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel7)
-                                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnFimVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
@@ -256,10 +252,10 @@ public class FormNovaVenda extends javax.swing.JFrame {
                                 .addGap(154, 154, 154)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(txtValorTotal1))
+                            .addComponent(txtValorTotal))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtValorPago1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtValorPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addGap(18, 18, 18)
@@ -269,9 +265,9 @@ public class FormNovaVenda extends javax.swing.JFrame {
                         .addGap(29, 29, 29)
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
-                        .addComponent(txtFormaPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cBFormaPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(22, 22, 22)
-                        .addComponent(btnSalvar)
+                        .addComponent(btnFimVenda)
                         .addGap(18, 18, 18)
                         .addComponent(btnCancelar))
                     .addGroup(layout.createSequentialGroup()
@@ -302,7 +298,7 @@ public class FormNovaVenda extends javax.swing.JFrame {
         itemVenda.setQuantidade(Integer.parseInt(txtQuantidadeProduto.getText()));
         listaItem.add(itemVenda);
         valorTotal += ((Integer.parseInt(txtQuantidadeProduto.getText())) * produtoAtual.getPrecoVenda());
-        txtTroco.setText(String.valueOf(valorTotal));
+        txtValorTotal.setText(String.valueOf(valorTotal));
     
     }     
    
@@ -324,17 +320,17 @@ public class FormNovaVenda extends javax.swing.JFrame {
         Frm.setVisible(true);
     }//GEN-LAST:event_btnConsultaActionPerformed
 
-    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSalvarActionPerformed
+    private void txtValorPagoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtValorPagoFocusLost
+       
+         txtTroco.setText(String.valueOf(Double.parseDouble(txtValorPago.getText().replace(",", ".")) - valorTotal));
+                                      
+    }//GEN-LAST:event_txtValorPagoFocusLost
 
-    private void txtTrocoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTrocoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTrocoActionPerformed
-
-    private void txtQuantidadeProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQuantidadeProdutoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtQuantidadeProdutoActionPerformed
+    private void btnFimVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFimVendaActionPerformed
+       
+        Venda venda = new Venda();
+        
+    }//GEN-LAST:event_btnFimVendaActionPerformed
 
     
     private CallbackForm<Produto> getCallbackForm() {
@@ -369,8 +365,9 @@ public class FormNovaVenda extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnConsulta;
+    private javax.swing.JButton btnFimVenda;
     private javax.swing.JButton btnIncluir;
-    private javax.swing.JButton btnSalvar;
+    private javax.swing.JComboBox<FormaPagamento> cBFormaPagamento;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -384,11 +381,10 @@ public class FormNovaVenda extends javax.swing.JFrame {
     private javax.swing.JTextField txtCodProduto;
     private javax.swing.JTextArea txtCupom;
     private javax.swing.JTextField txtDescricaoProduto;
-    private javax.swing.JComboBox<FormaPagamento> txtFormaPagamento;
     private javax.swing.JTextField txtQuantidadeProduto;
     private javax.swing.JFormattedTextField txtTroco;
-    private javax.swing.JFormattedTextField txtValorPago1;
-    private javax.swing.JFormattedTextField txtValorTotal1;
+    private javax.swing.JFormattedTextField txtValorPago;
+    private javax.swing.JFormattedTextField txtValorTotal;
     // End of variables declaration//GEN-END:variables
 
    
