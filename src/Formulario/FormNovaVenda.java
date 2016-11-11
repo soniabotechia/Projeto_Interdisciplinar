@@ -69,7 +69,7 @@ public class FormNovaVenda extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CashFlow - Nova Venda");
 
-        txtQuantidadeProduto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtQuantidadeProduto.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel2.setText("Código:");
@@ -94,6 +94,7 @@ public class FormNovaVenda extends javax.swing.JFrame {
         jLabel3.setText("Quantidade:");
 
         txtValorPago.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        txtValorPago.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         jLabel6.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel6.setText("Valor total:");
@@ -129,11 +130,13 @@ public class FormNovaVenda extends javax.swing.JFrame {
         jLabel5.setText("Troco:");
 
         txtValorTotal.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        txtValorTotal.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         jLabel8.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel8.setText("Valor pago:");
 
         txtValorTotal1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        txtValorTotal1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         btnConsulta.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnConsulta.setText("F1 Consulta Produtos");
