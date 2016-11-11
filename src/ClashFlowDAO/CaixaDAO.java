@@ -24,7 +24,7 @@ import utilitario.DataUtil;
  */
 public class CaixaDAO {
     
-     private static final Logger logger = Logger.getLogger(CaixaDAO.class.getName());
+    private static final Logger logger = Logger.getLogger(CaixaDAO.class.getName());
     private Connection conn;
     private PreparedStatement ps;
     private Statement st;
@@ -91,7 +91,7 @@ public class CaixaDAO {
              while(rs.next()) {
                  caixa = new Caixa();
                  caixa.setIdCaixa(rs.getInt("cxIdCaixa"));
-                 caixa.setDataCadastro(DataUtil.parseDate(rs.getDate("cxDataAbertura")));
+                 caixa.setDataAbertura(DataUtil.parseDate(rs.getDate("cxDataAbertura")));
                  caixa.setValorAbertura(rs.getDouble("cxValorAbertura"));
              }
              
