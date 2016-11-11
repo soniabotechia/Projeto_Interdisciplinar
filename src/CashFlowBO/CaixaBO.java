@@ -8,6 +8,8 @@ package CashFlowBO;
 import ClashFlowDAO.CaixaDAO;
 import ClashFlowObjeto.Caixa;
 import exception.DAOException;
+import javax.swing.JOptionPane;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,10 +24,17 @@ public class CaixaBO {
         caixaDAO = new CaixaDAO();
     }
     
-    public void AberturaCaixa(Caixa cx) throws DAOException
+    public void aberturaCaixa(Caixa cx) throws DAOException
     {
-        caixaDAO.abertura(cx);
-    }
+        if(cx.getDataFechamento()== null){
+            JOptionPane.showMessageDialog(null,"Já existe um caixa aberto") ;
+        }
+        else{
+            caixaDAO.abertura(cx);
+            JOptionPane.showMessageDialog(null,"Caixa aberto com sucesso");
+
+        }
+    }     
     
     public Caixa buscarCaixaAberto() throws DAOException {
         return caixaDAO.buscarCaixaAberto();

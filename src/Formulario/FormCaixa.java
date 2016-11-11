@@ -11,7 +11,7 @@ import exception.DAOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import static javax.swing.JOptionPane.showMessageDialog;
+
 
 /**
  *
@@ -129,19 +129,18 @@ public class FormCaixa extends javax.swing.JFrame {
     private void btnAbrirCaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirCaixaActionPerformed
         
         Caixa cx = new Caixa();
-        cx.setValorAbertura(Double.parseDouble(txtValorCaixa.getText()));
+        
         if(txtValorCaixa.getText().isEmpty()){
              JOptionPane.showMessageDialog(null,"Digite o valor da entrada!") ;
-            
         }
         else{
-        CaixaBO caixaBO = new CaixaBO();
+            cx.setValorAbertura(Double.parseDouble(txtValorCaixa.getText()));
+            CaixaBO caixaBO = new CaixaBO();
         try {
-            caixaBO.AberturaCaixa(cx);
-            showMessageDialog(null,"Caixa aberto com sucesso");
+            caixaBO.aberturaCaixa(cx);
             btnSairActionPerformed(evt);
         } catch (DAOException ex) {
-           showMessageDialog(null,"Não foi possivel abrir caixa!");
+           JOptionPane.showMessageDialog(null,"Não foi possivel abrir caixa!");
         }
         }
     }//GEN-LAST:event_btnAbrirCaixaActionPerformed

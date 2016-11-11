@@ -14,10 +14,28 @@ import java.util.Calendar;
 public class Caixa {
     
     private int idCaixa;
-    private Calendar dataCadastro;
+    private Calendar dataAbertura;
     private double valorAbertura;
     private double valorFechamento;
+    private Calendar dataFechamento;
 
+    public Calendar getDataAbertura() {
+        return dataAbertura;
+    }
+
+    public void setDataAbertura(Calendar dataAbertura) {
+        this.dataAbertura = dataAbertura;
+    }
+
+    public Calendar getDataFechamento() {
+        return dataFechamento;
+    }
+
+    public void setDataFechamento(Calendar dataFechamento) {
+        this.dataFechamento = dataFechamento;
+    }
+
+    
     public int getIdCaixa() {
         return idCaixa;
     }
@@ -25,15 +43,7 @@ public class Caixa {
     public void setIdCaixa(int idCaixa) {
         this.idCaixa = idCaixa;
     }
-
-    public Calendar getDataCadastro() {
-        return dataCadastro;
-    }
-
-    public void setDataCadastro(Calendar dataCadastro) {
-        this.dataCadastro = dataCadastro;
-    }
-
+    
     public double getValorAbertura() {
         return valorAbertura;
     }
