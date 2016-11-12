@@ -26,6 +26,9 @@ public class TipoMovimentoModel extends AbstractTableModel{
      public TipoMovimentoModel(List<TipoMovimento> tipoMovimentos) {
         this.tipoMovimentos = tipoMovimentos;
     }
+      public void addTipoMovimento(TipoMovimento tipomovimento){
+        tipoMovimentos.add(tipomovimento);
+    }
      
      @Override
     public int getRowCount() {

@@ -22,7 +22,7 @@ public class FormFormaPagamento extends javax.swing.JFrame {
     public FormFormaPagamento() {
         initComponents();
     }
-    
+    //LISTANDO ITENS NA TABELA 
      private List<FormaPagamento> getFormaPagamento() {
     
         FormaPagamentoBO formaPagamentoBO = new FormaPagamentoBO();

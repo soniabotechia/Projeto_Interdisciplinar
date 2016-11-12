@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import utilitario.DataUtil;
+import javax.sql.RowSetListener;
 
 /**
  *
@@ -30,6 +31,9 @@ public class LancamentoCaixaModel extends AbstractTableModel {
         this.tipoLancamentos = tipoLancamentos;
     }
      
+     public void addLancamentoCaixa(LancamentosCaixa lancamentoCaixa){
+     tipoLancamentos.add(lancamentoCaixa);
+    }
      @Override
     public int getRowCount() {
         return tipoLancamentos.size();

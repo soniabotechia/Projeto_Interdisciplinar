@@ -26,8 +26,11 @@ public class FormProduto extends javax.swing.JFrame {
        
     }
     
-
-  
+    private List<Produto> getProdutos() {
+    
+        ProdutoBO produtoBO = new ProdutoBO();
+        return produtoBO.buscarTodos();
+    }   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -135,7 +138,7 @@ public class FormProduto extends javax.swing.JFrame {
                                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(55, 273, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(55, 55, 55)
+                                .addGap(47, 47, 47)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(lblIcone, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))))
@@ -174,11 +177,23 @@ public class FormProduto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-       FormNovoProduto formNewPro = new FormNovoProduto();
-       formNewPro.setVisible(true);
-       
+        formNovoProduto = new FormNovoProduto(this.callbackProd());
+        formNovoProduto.setVisible(true); //parei aq
     }//GEN-LAST:event_btnNovoActionPerformed
 
+     private CallbackForm callbackProd(){
+        return new CallbackForm<Produto>(){
+             @Override       
+             public void fim(Produto produto){
+                formNovoProduto.setVisible(false);
+                formNovoProduto = null;// limpando a memoria
+                //jogando dentro da variavel o TbModel para ser manipulado
+                ProdutoTableModel produtoTableModel = (ProdutoTableModel) jTable1.getModel();
+                produtoTableModel.addFormaPagamento(produto);
+                produtoTableModel.fireTableDataChanged();
+            }                
+        };
+    }
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         FormAlterarProduto formAltPro = new FormAlterarProduto();
         formAltPro.setVisible(true);
@@ -192,12 +207,7 @@ public class FormProduto extends javax.swing.JFrame {
         this.dispose(); //Comando para encerrar a aplicação.
     }//GEN-LAST:event_btnSairActionPerformed
 
-    private List<Produto> getProdutos() {
     
-        ProdutoBO produtoBO = new ProdutoBO();
-        return produtoBO.buscarTodos();
-        
-    }
     
     /**
      * @param args the command line arguments
@@ -249,4 +259,5 @@ public class FormProduto extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblIcone;
     // End of variables declaration//GEN-END:variables
+    private FormNovoProduto formNovoProduto;
 }

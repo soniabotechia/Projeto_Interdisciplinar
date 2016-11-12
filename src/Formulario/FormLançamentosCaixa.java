@@ -23,6 +23,12 @@ public class FormLançamentosCaixa extends javax.swing.JFrame {
     public FormLançamentosCaixa() {
         initComponents();
     }
+      private List<LancamentosCaixa> getLancamentoCaixa() {
+    
+        LancamentosCaixaBO lancamentoCaixaBO = new LancamentosCaixaBO();
+        return lancamentoCaixaBO.buscarTodos();
+        
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -119,12 +125,24 @@ public class FormLançamentosCaixa extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-        FormNovoLancamentosCaixa formNewPro = new FormNovoLancamentosCaixa();
-        formNewPro.setVisible(true);
+       formNovoLancamentoCaixa = new FormNovoLancamentosCaixa(this.callbackLanc());
+       formNovoLancamentoCaixa.setVisible(true);
         
-
     }//GEN-LAST:event_btnNovoActionPerformed
 
+    private CallbackForm callbackLanc(){
+        return new CallbackForm<LancamentosCaixa>(){
+             @Override       
+             public void fim(LancamentosCaixa lancamentoCaixa){
+               formNovoLancamentoCaixa.setVisible(false);
+               formNovoLancamentoCaixa = null;// limpando a memoria
+                //jogando dentro da variavel o TbModel para ser manipulado
+               LancamentoCaixaModel lancamentoCaixaModel = (LancamentoCaixaModel) jTable1.getModel();
+               lancamentoCaixaModel.addLancamentoCaixa(lancamentoCaixa);
+               lancamentoCaixaModel.fireTableDataChanged();
+            }                
+        };
+    }
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         FormAlterarProduto formAltPro = new FormAlterarProduto();
         formAltPro.setVisible(true);
@@ -173,7 +191,7 @@ public class FormLançamentosCaixa extends javax.swing.JFrame {
             }
         });
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnExcluir;
@@ -182,4 +200,5 @@ public class FormLançamentosCaixa extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+    private FormNovoLancamentosCaixa formNovoLancamentoCaixa;
 }

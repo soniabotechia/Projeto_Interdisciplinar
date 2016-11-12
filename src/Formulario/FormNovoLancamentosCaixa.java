@@ -26,9 +26,22 @@ import javax.swing.JOptionPane;
  */
 public class FormNovoLancamentosCaixa extends javax.swing.JFrame {
     
-    public FormNovoLancamentosCaixa() {
-        initComponents();
+     private CallbackForm<LancamentosCaixa> callbackForm;
+     
+     public FormNovoLancamentosCaixa()
+    {
+        this(null);
     }
+    public FormNovoLancamentosCaixa(CallbackForm<LancamentosCaixa> callbackForm) {
+        init(callbackForm);
+    }
+    private void init (CallbackForm<LancamentosCaixa> callbackForm) {
+        initComponents();
+        this.callbackForm = callbackForm;
+        this.labelError.setVisible(false);
+    }
+
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -52,6 +65,7 @@ public class FormNovoLancamentosCaixa extends javax.swing.JFrame {
         btnSair = new javax.swing.JButton();
         btnAdicionaTipoMovimento = new javax.swing.JButton();
         btnAdicionaTipoPagamento = new javax.swing.JButton();
+        labelError = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -135,69 +149,74 @@ public class FormNovoLancamentosCaixa extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE)
                 .addGap(50, 50, 50))
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(39, 39, 39)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtobservacao, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtValorLancamento, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(cbNovoMovimento, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnAdicionaTipoMovimento, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
+                                .addGap(157, 157, 157)
+                                .addComponent(btnSalvarNovoLancamento)
+                                .addGap(44, 44, 44))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(119, 119, 119)
-                                .addComponent(btnSalvarNovoLancamento)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(CBFormaPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnAdicionaTipoPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(223, 223, 223)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtobservacao, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(cbNovoMovimento, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnAdicionaTipoPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(btnAdicionaTipoMovimento, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtValorLancamento, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(0, 37, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(104, 104, 104)
+                .addComponent(labelError, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbNovoMovimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(76, 76, 76)
-                        .addComponent(btnAdicionaTipoMovimento, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(21, 21, 21)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cbNovoMovimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAdicionaTipoMovimento, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtobservacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtValorLancamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtValorLancamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(CBFormaPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnAdicionaTipoPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvarNovoLancamento)
                     .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(labelError, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -218,7 +237,11 @@ public class FormNovoLancamentosCaixa extends javax.swing.JFrame {
     private void btnSalvarNovoLancamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarNovoLancamentoActionPerformed
       
         LancamentosCaixa lc = new LancamentosCaixa();
-        
+        if(txtValorLancamento.getText().isEmpty())
+        {
+             JOptionPane.showMessageDialog(null,"Digite o valor do lançamento!") ;
+        }
+        else{
         lc.setFormaPagamento((FormaPagamento) CBFormaPagamento.getSelectedItem());
         lc.setTipoMovimento((TipoMovimento)cbNovoMovimento.getSelectedItem());
         lc.setObservacao(txtobservacao.getText());
@@ -229,7 +252,12 @@ public class FormNovoLancamentosCaixa extends javax.swing.JFrame {
                 LancamentosCaixaBO LancamentosCaixaBO= new LancamentosCaixaBO();
                 LancamentosCaixaBO.salvar(lc);
                 JOptionPane.showMessageDialog(null,"Novo movimento salvo com sucesso!");
-                btnSairActionPerformed(evt);
+                
+                if(callbackForm !=null)
+                 {
+                    callbackForm.fim(lc);
+               
+                 }
                 } catch (CaixaFechadoException ex) {
                   Logger.getLogger(FormNovoLancamentosCaixa.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (DAOException ex) {
@@ -237,7 +265,7 @@ public class FormNovoLancamentosCaixa extends javax.swing.JFrame {
                }
         
         
-        
+        }
     }//GEN-LAST:event_btnSalvarNovoLancamentoActionPerformed
     
     
@@ -246,8 +274,8 @@ public class FormNovoLancamentosCaixa extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnAdicionaTipoMovimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionaTipoMovimentoActionPerformed
-        FormNovoTipoMovimento form = new FormNovoTipoMovimento(); //Instanciação do formulário de nova venda
-        form.setVisible(true);
+        formNovoTipoMovimento = new FormNovoTipoMovimento(this.callbackTipoMovimento());
+        formNovoTipoMovimento.setVisible(true);
     }//GEN-LAST:event_btnAdicionaTipoMovimentoActionPerformed
 
     private void cbNovoMovimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNovoMovimentoActionPerformed
@@ -276,6 +304,22 @@ public class FormNovoLancamentosCaixa extends javax.swing.JFrame {
                 formNovaFormaPagamento = null;
                 CBFormaPagamento.addItem(formaPagamento);
                 CBFormaPagamento.setSelectedItem(formaPagamento);
+            }
+        };
+        
+    }
+    
+    private CallbackForm callbackTipoMovimento() {
+        
+        //Instanciando uma classe anonima
+        return new CallbackForm<TipoMovimento>() {
+            @Override
+            public void fim(TipoMovimento tipomovimento) {
+               formNovoTipoMovimento.setVisible(false);
+                //seta o Objeto como null para o GC limpar da memoria
+                formNovoTipoMovimento = null;
+                cbNovoMovimento.addItem(tipomovimento);
+                cbNovoMovimento.setSelectedItem(tipomovimento);
             }
         };
         
@@ -328,9 +372,11 @@ public class FormNovoLancamentosCaixa extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel labelError;
     private javax.swing.JTextField txtValorLancamento;
     private javax.swing.JTextField txtobservacao;
     // End of variables declaration//GEN-END:variables
 
     private FormNovaFormaPagamento formNovaFormaPagamento;
+    private FormNovoTipoMovimento formNovoTipoMovimento;
 }

@@ -9,6 +9,7 @@ import CashFlowBO.ProdutoBO;
 import CashFlowBO.GrupoProdutoBO;
 import ClashFlowObjeto.GrupoProduto;
 import ClashFlowObjeto.Produto;
+import exception.DAOException;
 import java.util.List;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
@@ -18,20 +19,26 @@ import static javax.swing.JOptionPane.showMessageDialog;
  * @author Caio Henrique
  */
 public class FormNovoProduto extends javax.swing.JFrame {
- Produto p = new Produto();
+
     /**
      * Creates new form FormNovoPr
      */
-    public FormNovoProduto() {
-        init();
-    }
-
+ private CallbackForm<Produto> callbackForm;
     
-    private void init() {
-        
+    public FormNovoProduto()
+    {
+        this(null);
+    }
+    //metodo construtor que recebe um objeto do tipo forma de pagamento
+    public FormNovoProduto(CallbackForm<Produto> callbackForm)
+    {
+        init(callbackForm);
+    }
+    
+    private void init (CallbackForm<Produto> callbackForm) {
         initComponents();
-        
-        
+        this.callbackForm = callbackForm;
+        this.labelError.setVisible(false);
     }
     
     /**
@@ -66,6 +73,7 @@ public class FormNovoProduto extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         btnSalvar = new javax.swing.JButton();
+        labelError = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         btnSair = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -171,6 +179,7 @@ public class FormNovoProduto extends javax.swing.JFrame {
             }
         });
         ABAS1.add(btnSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 360, -1, 41));
+        ABAS1.add(labelError, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 450, 530, 40));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/product.png"))); // NOI18N
 
@@ -244,6 +253,20 @@ public class FormNovoProduto extends javax.swing.JFrame {
 
         jLabel17.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel17.setText("Preço sugerido de venda:");
+
+        txtPrCalcFrete.setText("0");
+
+        txtPrCalcCompra.setText("0");
+
+        txtPrCalcCusto.setText("0");
+
+        txtPrCalcICMS.setText("0");
+
+        txtPrCalcCartao.setText("0");
+
+        txtPrCalcLucro.setText("0");
+
+        txtPrecoSugerido.setText("0.00");
 
         btnCalcular.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnCalcular.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/1476307695_office-17.png"))); // NOI18N
@@ -376,8 +399,28 @@ public class FormNovoProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_txtEstoqueActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        int aux = 0;
-       
+        Produto p = new Produto();
+        if(txtDescricaoProduto.getText().isEmpty())
+        {
+             JOptionPane.showMessageDialog(null,"Digite a descrição do produto!") ;
+        }
+        /*if(txtQuantidadeProduto.getText().isEmpty()) QUANTIDADE NAO EH A MESMA COISA Q ESTOQUE?
+        {
+            JOptionPane.showMessageDialog(null,"Digite a quantidade de produtos!") ;
+        }*/
+        if(txtEstoque.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null,"Informe o estoque!") ;
+        }
+        if(txtLocal.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null,"Digite o local do produto!") ;
+        }
+        if(txtPrecoVenda.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null,"Digite o preço de venda do produto!") ;
+        }
+        else{
         p.setDescricaoProduto(txtDescricaoProduto.getText());
         p.setEstoque(Integer.parseInt(txtEstoque.getText()));
         p.setObservacao(txtObservacao.getText());
@@ -385,61 +428,40 @@ public class FormNovoProduto extends javax.swing.JFrame {
         p.setLocal(txtLocal.getText());
         //Pega o item selecionado no combobox de grupos de produtos
         p.setGrupoProduto((GrupoProduto) CBGrupoProduto.getSelectedItem());        
-        aux = validaCampos(evt);
-        if(aux == 0)
-        {
         ProdutoBO produtoBO = new ProdutoBO();
+       //try
+        {
+        
         produtoBO.salvar(p);
         JOptionPane.showMessageDialog(null,"Produto Salvo com Sucesso!");
         btnSairActionPerformed(evt);
-        
+         if(callbackForm !=null)
+           {
+               callbackForm.fim(p);
+               
+           }
+            btnSairActionPerformed(evt);
         }
            
-        
-              
+       /* catch(DAOException ex)
+        {
+            showError(ex.getMessage());
+        }*/
+        }        
     }//GEN-LAST:event_btnSalvarActionPerformed
-
+    
+     private void showError(String texto)
+    {
+        this.labelError.setText(texto);
+        this.labelError.setVisible(true);
+    }
     private void btnAdicionaGrupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionaGrupoActionPerformed
         //FormGrupoProduto form = new FormGrupoProduto(); //Instanciação do formulário de nova venda
         //form.setVisible(true);
         formNovoGrupo = new FormNovoGrupo(this.callbackGrupo());
         formNovoGrupo.setVisible(true);
     }//GEN-LAST:event_btnAdicionaGrupoActionPerformed
-  private int validaCampos(java.awt.event.ActionEvent evt)
-     {
-        int erro = 0;
-        if(txtDescricaoProduto.getText().isEmpty())
-        {
-           showMessageDialog(null,"Campo Descrição vazio!");
-           erro++;
-        }
-        if(txtQuantidadeProduto.getText().isEmpty())
-        {
-            showMessageDialog(null,"Campo Quantidade vazio!");
-            erro++;
-        }
-        if(txtEstoque.getText().isEmpty())
-        {
-            showMessageDialog(null,"Campo Estoque vazio!");
-            erro++;
-        }
-         if(txtLocal.getText().isEmpty())
-        {
-            showMessageDialog(null,"Campo Local vazio!");
-            erro++;
-        }
-          if(txtPrecoCompra.getText().isEmpty())
-        {
-            showMessageDialog(null,"Campo Preço Compra vazio!");
-            erro++;
-        } if(txtPrecoVenda.getText().isEmpty())
-        {
-            showMessageDialog(null,"Campo Preço venda vazio!");
-            erro++;
-        }
-       
-        return erro;
-       }
+
     private CallbackForm callbackGrupo() {
         
         //Instanciando uma classe anonima
@@ -468,6 +490,7 @@ public class FormNovoProduto extends javax.swing.JFrame {
 
     private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerformed
        Float resultado;
+     
        resultado = ((Float.parseFloat(txtPrCalcCompra.getText())
                + (Float.parseFloat(txtPrCalcFrete.getText()))
                + (Float.parseFloat(txtPrCalcCusto.getText())))
@@ -552,6 +575,7 @@ public class FormNovoProduto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel labelError;
     private javax.swing.JTextField txtDescricaoProduto;
     private javax.swing.JTextField txtEstoque;
     private javax.swing.JTextField txtLocal;

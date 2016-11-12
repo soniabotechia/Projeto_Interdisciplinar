@@ -333,6 +333,13 @@
                     </Constraint>
                   </Constraints>
                 </Component>
+                <Component class="javax.swing.JLabel" name="labelError">
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="90" y="450" width="530" height="40"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
               </SubComponents>
             </Container>
             <Component class="javax.swing.JLabel" name="jLabel8">
@@ -560,18 +567,39 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtPrCalcFrete">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="0"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtPrCalcCompra">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="0"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtPrCalcCusto">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="0"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtPrCalcICMS">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="0"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtPrCalcCartao">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="0"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtPrCalcLucro">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="0"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtPrecoSugerido">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="0.00"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btnCalcular">
               <Properties>

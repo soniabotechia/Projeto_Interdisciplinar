@@ -124,11 +124,24 @@ public class FormTipoMovimento extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNovoMovimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoMovimentoActionPerformed
-        FormNovoTipoMovimento formNewPro = new FormNovoTipoMovimento();
-        formNewPro.setVisible(true);
+       formNovoTipoMovimento = new FormNovoTipoMovimento(this.callbackTP());
+       formNovoTipoMovimento.setVisible(true);
 
     }//GEN-LAST:event_btnNovoMovimentoActionPerformed
 
+    private CallbackForm callbackTP(){
+        return new CallbackForm<TipoMovimento>(){
+             @Override       
+             public void fim(TipoMovimento tipoMovimento){
+                formNovoTipoMovimento.setVisible(false);
+                formNovoTipoMovimento = null;// limpando a memoria
+                //jogando dentro da variavel o TbModel para ser manipulado
+                TipoMovimentoModel tipoMovimentoModel = (TipoMovimentoModel) jTable1.getModel();
+                tipoMovimentoModel.addTipoMovimento(tipoMovimento);
+                tipoMovimentoModel.fireTableDataChanged();
+            }                
+        };
+    }
     private void btnAlterarMovimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarMovimentoActionPerformed
         FormAlterarProduto formAltPro = new FormAlterarProduto();
         formAltPro.setVisible(true);
@@ -181,4 +194,5 @@ public class FormTipoMovimento extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+    private FormNovoTipoMovimento formNovoTipoMovimento;
 }

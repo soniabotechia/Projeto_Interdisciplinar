@@ -152,6 +152,7 @@ public class FormNovaFormaPagamento extends javax.swing.JFrame {
                callbackForm.fim(fp);
                
            }
+            btnSairActionPerformed(evt);
         }
         catch(DAOException ex)
         {

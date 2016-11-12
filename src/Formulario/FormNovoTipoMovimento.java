@@ -5,21 +5,34 @@
  */
 package Formulario;
 
-import CashFlowBO.GrupoProdutoBO;
+
 import CashFlowBO.TipoMovimentoBO;
 import ClashFlowObjeto.TipoMovimento;
+import exception.DAOException;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 
 /**
  *
  * @author Caio Henrique
  */
 public class FormNovoTipoMovimento extends javax.swing.JFrame {
- 
-    TipoMovimento tm = new TipoMovimento();
-    public FormNovoTipoMovimento() {
-        initComponents();
+   private CallbackForm<TipoMovimento> callbackForm;
+  
+   public FormNovoTipoMovimento()
+    {
+        this(null);
     }
+     public FormNovoTipoMovimento(CallbackForm<TipoMovimento> callbackForm)
+    {
+        init(callbackForm);
+    }
+    
+    private void init (CallbackForm<TipoMovimento> callbackForm) {
+        initComponents();
+        this.callbackForm = callbackForm;
+        this.labelError.setVisible(false);
+     }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -38,6 +51,7 @@ public class FormNovoTipoMovimento extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         btnCredito = new javax.swing.JRadioButton();
         btnDebito = new javax.swing.JRadioButton();
+        labelError = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -85,37 +99,46 @@ public class FormNovoTipoMovimento extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(82, 82, 82)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(btnSalvarNovoMovimento)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 179, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(121, 121, 121)
                                 .addComponent(btnCredito)
                                 .addGap(36, 36, 36)
-                                .addComponent(btnDebito)
-                                .addGap(64, 64, 64))
-                            .addComponent(txtDescNovoMovimento, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 70, Short.MAX_VALUE))
+                                .addComponent(btnDebito))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtDescNovoMovimento, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(62, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(125, 125, 125))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(123, 123, 123))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(labelError, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(62, 62, 62))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addGap(28, 28, 28)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(labelError, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtDescNovoMovimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                    .addComponent(txtDescNovoMovimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDebito)
                     .addComponent(btnCredito))
@@ -123,7 +146,7 @@ public class FormNovoTipoMovimento extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvarNovoMovimento)
                     .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         pack();
@@ -131,19 +154,36 @@ public class FormNovoTipoMovimento extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalvarNovoMovimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarNovoMovimentoActionPerformed
+        hideError();
         int aux=0;
-       
+        TipoMovimento tm = new TipoMovimento();
         tm.setDescricaoMovimento(txtDescNovoMovimento.getText());
         tm.setCredito(btnCredito.isSelected());
         tm.setDebito(btnDebito.isSelected());
+        
         aux= validacao(evt);
+        
         if(aux == 0){
-        TipoMovimentoBO tmBO;
-        tmBO = new TipoMovimentoBO();
-        tmBO.salvar(tm);
-        JOptionPane.showMessageDialog(null,"Novo movimento salvo com sucesso!");
-        btnSairActionPerformed(evt);
+            TipoMovimentoBO tmBO;
+            tmBO = new TipoMovimentoBO();
+       // try{
+       
+            tmBO.salvar(tm);
+            JOptionPane.showMessageDialog(null,"Novo movimento salvo com sucesso!");
+            
+            if(callbackForm !=null)
+           {
+               callbackForm.fim(tm);
+               
+           }
+           btnSairActionPerformed(evt);
+        
+         /*catch(DAOException ex)
+        {
+            showError(ex.getMessage());
+        }*/
         }
+    
        
     }//GEN-LAST:event_btnSalvarNovoMovimentoActionPerformed
     private int validacao(java.awt.event.ActionEvent evt)
@@ -161,6 +201,16 @@ public class FormNovoTipoMovimento extends javax.swing.JFrame {
         }
         return erro;
      }
+      private void hideError()
+    {
+        this.labelError.setText("");
+        this.labelError.setVisible(false);
+    }
+     private void showError(String texto)
+    {
+        this.labelError.setText(texto);
+        this.labelError.setVisible(true);
+    }
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         this.dispose(); //Comando utilizado para encerrar o formulário sem encerrar a aplicação.
     }//GEN-LAST:event_btnSairActionPerformed
@@ -212,6 +262,7 @@ public class FormNovoTipoMovimento extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel labelError;
     private javax.swing.JTextField txtDescNovoMovimento;
     // End of variables declaration//GEN-END:variables
 }

@@ -28,6 +28,9 @@ public class ProdutoTableModel extends AbstractTableModel {
         this.produtos = produtos;
     }
     
+    public void addFormaPagamento(Produto produto){
+       produtos.add(produto);
+    }
     @Override
     public int getRowCount() {
         return produtos.size();
