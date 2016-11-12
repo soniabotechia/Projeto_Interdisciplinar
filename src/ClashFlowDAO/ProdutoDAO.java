@@ -36,7 +36,7 @@ public class ProdutoDAO
                     
 			conn = new Conexao().conectar();
 			ps = conn.prepareStatement( "INSERT INTO PRODUTOS(prDescricaoProduto, prEstoque,"
-                                + " prObservacao, prPrecoVenda, prLocal, gpIdGrupoProduto, prDataCadastro) VALUES(?,?,?,?,?,?, now())");
+                                + " prObservacao, prPrecoVenda, prLocal, gpIdGrupoProduto, prDataCadastro) VALUES(?,?,?,?,?,?, now())",Statement.RETURN_GENERATED_KEYS);
                
                         ps.setString(1, produto.getDescricaoProduto());
                         ps.setInt(2, produto.getEstoque());
@@ -45,7 +45,12 @@ public class ProdutoDAO
                         ps.setString(5, produto.getLocal());
                         ps.setInt(6, produto.getGrupoProduto().getIdGrupoProduto());
                         ps.execute();
-                       
+                        
+                       rs = ps.getGeneratedKeys();
+                        
+                        if (rs.next()) {
+                            produto.setCodigoProduto(rs.getInt(1));
+                        } 
                         
                 }
                 catch (SQLException e)

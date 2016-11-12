@@ -32,13 +32,18 @@ public class TipoMovimentoDAO {
                 {
                     
 			conn = new Conexao().conectar();
-			ps = conn.prepareStatement( "INSERT INTO tipo_movimento(tpmovDescricaoMovimento, tpmovcredito, tpmovdebito) VALUES(?,?,?)");
+			ps = conn.prepareStatement( "INSERT INTO tipo_movimento(tpmovDescricaoMovimento, tpmovcredito, tpmovdebito) VALUES(?,?,?)",Statement.RETURN_GENERATED_KEYS);
                
                         ps.setString(1, tm.getDescricaoMovimento());
                         ps.setInt(2,tm.isCredito()? 1 : 0);
                         ps.setInt(3,tm.isDebito()? 1 : 0);
                         ps.execute();
-                       
+                        
+                        rs = ps.getGeneratedKeys();
+                        
+                        if (rs.next()) {
+                            tm.setIdTipoMovimento(rs.getInt(1));
+                        } 
                         
                 }
                 catch (SQLException e)
