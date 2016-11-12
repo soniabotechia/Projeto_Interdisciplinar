@@ -66,16 +66,15 @@ public class UsuarioDAO {
                 {
                         // String date = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime());
 			conn = new Conexao().conectar();
-			ps = conn.prepareStatement( "INSERT INTO USUARIOS (usuNome, usuSenha, usuStatus, usuAtivo, usuDataCadastro) VALUES(?,?,?,?,now())");
+			ps = conn.prepareStatement( "INSERT INTO USUARIO (usuNome, usuSenha, usuStatus, usuAtivo) VALUES(?,?,?,?)");
                
                         ps.setString(1, usuario.getUsuario());
                         ps.setString(2, usuario.getSenha());
                         ps.setString(3, usuario.getStatus());
                         ps.setString(4, usuario.getAtivo());
-                        ps.setString(5, usuario.getDataCadastro());
                         ps.execute();
                        
-                        
+                        JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
                 }
                 catch (SQLException e)
                 {
