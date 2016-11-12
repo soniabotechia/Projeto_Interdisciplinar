@@ -189,7 +189,7 @@ public class FormProduto extends javax.swing.JFrame {
                 formNovoProduto = null;// limpando a memoria
                 //jogando dentro da variavel o TbModel para ser manipulado
                 ProdutoTableModel produtoTableModel = (ProdutoTableModel) jTable1.getModel();
-                produtoTableModel.addFormaPagamento(produto);
+                produtoTableModel.addProduto(produto);
                 produtoTableModel.fireTableDataChanged();
             }                
         };

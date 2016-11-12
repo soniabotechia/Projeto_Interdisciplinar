@@ -28,7 +28,7 @@ public class ProdutoTableModel extends AbstractTableModel {
         this.produtos = produtos;
     }
     
-    public void addFormaPagamento(Produto produto){
+    public void addProduto(Produto produto){
        produtos.add(produto);
     }
     @Override
