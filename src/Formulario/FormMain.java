@@ -50,6 +50,7 @@ public class FormMain extends javax.swing.JFrame {
         btnVendas1 = new javax.swing.JButton();
         btnProdutos = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        btnUsuarios = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -103,6 +104,20 @@ public class FormMain extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/LOGO.PNG"))); // NOI18N
         jLabel1.setText("jLabel1");
+
+        btnUsuarios.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/btnUsuario2.png"))); // NOI18N
+        btnUsuarios.setText("Usuários [F3]");
+        btnUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUsuariosActionPerformed(evt);
+            }
+        });
+        btnUsuarios.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnUsuariosKeyPressed(evt);
+            }
+        });
 
         jMenuBar1.setToolTipText("");
         jMenuBar1.setName("Cash Flow"); // NOI18N
@@ -216,7 +231,8 @@ public class FormMain extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnVendas1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnProdutos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnProdutos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnUsuarios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(137, 137, 137)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 678, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(230, Short.MAX_VALUE))
@@ -232,7 +248,9 @@ public class FormMain extends javax.swing.JFrame {
                         .addComponent(btnProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(157, 157, 157)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(73, Short.MAX_VALUE))
         );
 
@@ -300,6 +318,18 @@ public class FormMain extends javax.swing.JFrame {
         form.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
+        FormUsuario form = new FormUsuario();
+        form.setVisible(true);
+    }//GEN-LAST:event_btnUsuariosActionPerformed
+
+    private void btnUsuariosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnUsuariosKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_F3){
+          FormUsuario form = new FormUsuario();
+          form.setVisible(true);
+      }
+    }//GEN-LAST:event_btnUsuariosKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -340,6 +370,7 @@ public class FormMain extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnProdutos;
+    private javax.swing.JButton btnUsuarios;
     private javax.swing.JButton btnVendas1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
