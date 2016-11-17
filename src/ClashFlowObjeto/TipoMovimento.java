@@ -14,7 +14,15 @@ public class TipoMovimento {
     private String descricaoMovimento;
     private boolean credito;
     private boolean debito; 
+
+    public TipoMovimento(int idTipoMovimento) {
+        this.idTipoMovimento = idTipoMovimento;
+    }
     
+    public TipoMovimento() {
+        
+    }
+       
     public int getIdTipoMovimento() {
         return idTipoMovimento;
     }

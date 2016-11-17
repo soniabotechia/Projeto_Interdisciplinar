@@ -8,10 +8,13 @@ package Formulario;
 //import ClassesBO.VendasBO;
 //import Objetos.Vendas;
 import CashFlowBO.FormaPagamentoBO;
+import CashFlowBO.VendaBO;
 import ClashFlowObjeto.FormaPagamento;
 import ClashFlowObjeto.ItemVenda;
+import ClashFlowObjeto.LancamentosCaixa;
 import ClashFlowObjeto.Produto;
 import ClashFlowObjeto.Venda;
+import exception.DAOException;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
@@ -250,9 +253,9 @@ public class FormNovaVenda extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(btnConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(154, 154, 154)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(txtValorTotal))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtValorPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -296,10 +299,16 @@ public class FormNovaVenda extends javax.swing.JFrame {
         ItemVenda itemVenda = new ItemVenda();
         itemVenda.setProduto(produtoAtual);
         itemVenda.setQuantidade(Integer.parseInt(txtQuantidadeProduto.getText()));
-        listaItem.add(itemVenda);
-        valorTotal += ((Integer.parseInt(txtQuantidadeProduto.getText())) * produtoAtual.getPrecoVenda());
-        txtValorTotal.setText(String.valueOf(valorTotal));
-    
+        
+        if(produtoAtual.getEstoque()>= itemVenda.getQuantidade()){
+            listaItem.add(itemVenda);
+            valorTotal += ((Integer.parseInt(txtQuantidadeProduto.getText())) * produtoAtual.getPrecoVenda());
+            txtValorTotal.setText(String.valueOf(valorTotal));
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null,"Produto indicado não contém estoque") ;
+        }
     }     
    
     private void btnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirActionPerformed
@@ -322,6 +331,7 @@ public class FormNovaVenda extends javax.swing.JFrame {
 
     private void txtValorPagoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtValorPagoFocusLost
        
+        //replace troca a , por .
          txtTroco.setText(String.valueOf(Double.parseDouble(txtValorPago.getText().replace(",", ".")) - valorTotal));
                                       
     }//GEN-LAST:event_txtValorPagoFocusLost
@@ -329,6 +339,17 @@ public class FormNovaVenda extends javax.swing.JFrame {
     private void btnFimVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFimVendaActionPerformed
        
         Venda venda = new Venda();
+        
+        venda.setTotalVenda(Double.parseDouble(txtValorTotal.getText().replace(",", ".")));
+        venda.setListaItem(listaItem);
+        venda.setPagamento((FormaPagamento) cBFormaPagamento.getSelectedItem());
+        
+        VendaBO vendaBO = new VendaBO();
+        try {
+            vendaBO.novaVenda(venda);
+        } catch (DAOException ex) {
+            Logger.getLogger(FormNovaVenda.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_btnFimVendaActionPerformed
 

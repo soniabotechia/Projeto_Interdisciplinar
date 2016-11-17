@@ -15,12 +15,12 @@ import java.sql.SQLException;
  */
 public class Conexao 
 {
-    final private String driver = "com.mysql.jdbc.Driver";
-    final private String url = "jdbc:mysql://localhost:3305/cashflow";
-    final private String usuario = "root";
-    final private String senha = "root";
+    private static final String DRIVER = "com.mysql.jdbc.Driver";
+    private static final String URL = "jdbc:mysql://localhost:3305/cashflow";
+    private static final String USUARIO = "root";
+    private static final String SENHA = "root";
     
-    public Connection conectar() throws SQLException
+    public static Connection conectar() throws SQLException
     {
         Connection conn = null;
         
@@ -30,13 +30,13 @@ public class Conexao
             Irá carregar para memória as classes da biblioteca do driver de conexão que gerencia a conexão com 
             o banco de dados.
             */
-            Class.forName(driver);
+            Class.forName(DRIVER);
             /*
             A partir das classes do driver que estão na memória a aplicação
             estabelece a conexão com banco através dos parâmetros url, usuário e senha. Uma instância 
             da conexão é mantida na memória até que o usuário faça a remoção ou finalize a aplicação. 
             */
-            conn = DriverManager.getConnection(url,usuario,senha);
+            conn = DriverManager.getConnection(URL,USUARIO,SENHA);
         }
         catch(ClassNotFoundException ex)
         {

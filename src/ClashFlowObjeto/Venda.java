@@ -18,25 +18,10 @@ public class Venda {
     private Calendar data;
     private int quantidade;
     private double totalVenda;
-    private List<ItemVenda> Itemvenda ;
+    private List<ItemVenda> ListaItem ;
     private FormaPagamento pagamento;
+    private LancamentosCaixa lancamento;
 
-    public List getItemvenda() {
-        return Itemvenda;
-    }
-
-    public void setItemvenda(List Itemvenda) {
-        this.Itemvenda = Itemvenda;
-    }
-
-    public FormaPagamento getPagamento() {
-        return pagamento;
-    }
-
-    public void setPagamento(FormaPagamento pagamento) {
-        this.pagamento = pagamento;
-    }
-    
     public int getIdVenda() {
         return idVenda;
     }
@@ -68,6 +53,32 @@ public class Venda {
     public void setTotalVenda(double totalVenda) {
         this.totalVenda = totalVenda;
     }
+
+    public List<ItemVenda> getListaItem() {
+        return ListaItem;
+    }
+
+    public void setListaItem(List<ItemVenda> ListaItem) {
+        this.ListaItem = ListaItem;
+    }
+
+    public FormaPagamento getPagamento() {
+        return pagamento;
+    }
+
+    public void setPagamento(FormaPagamento pagamento) {
+        this.pagamento = pagamento;
+    }
+
+    public LancamentosCaixa getLancamento() {
+        return lancamento;
+    }
+
+    public void setLancamento(LancamentosCaixa lancamento) {
+        this.lancamento = lancamento;
+    }
+
+    
     
     
 }
