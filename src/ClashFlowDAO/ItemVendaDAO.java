@@ -39,8 +39,8 @@ public class ItemVendaDAO {
                 ps.setLong(1, item.getProduto().getCodigoProduto());
                 ps.setLong(2, item.getVenda().getIdVenda());
                 ps.setInt(3, item.getQuantidade());
-                       
-            ps.executeQuery();
+           
+                ps.executeQuery();
             
             
         } catch (SQLException ex) {

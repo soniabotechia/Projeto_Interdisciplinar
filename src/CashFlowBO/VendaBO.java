@@ -50,7 +50,7 @@ public class VendaBO {
         Caixa caixa = caixaBO.buscarCaixaAberto();
         if(caixa == null)
         {
-             JOptionPane.showMessageDialog(null,"Caixa Fechado") ;
+             JOptionPane.showMessageDialog(null,"Caixa Fechado");
              return;
         }
         //pega cada item da lista de venda e seta um novo objeto ItemVenda
@@ -78,7 +78,7 @@ public class VendaBO {
             vendaDAO.add(venda, conn);
             
             for(ItemVenda item : venda.getListaItem()) {
-                // validar estoque aki dentro!!
+                //validar estoque aki dentro!!
                 itemVendaDAO.add(item, conn);
             }    
             
