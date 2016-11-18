@@ -85,7 +85,7 @@ public class FormProduto extends javax.swing.JFrame {
             }
         });
 
-        lblIcone.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/icone.png"))); // NOI18N
+        lblIcone.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/product_1.png"))); // NOI18N
 
         jTable1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jTable1.setModel(new ProdutoTableModel(getProdutos()));
@@ -134,7 +134,7 @@ public class FormProduto extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
+                        .addContainerGap()
                         .addComponent(lblIcone, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
