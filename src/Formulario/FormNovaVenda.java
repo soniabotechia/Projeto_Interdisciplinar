@@ -307,7 +307,7 @@ public class FormNovaVenda extends javax.swing.JFrame {
         }
         else
         {
-            JOptionPane.showMessageDialog(null,"Produto indicado não contém estoque") ;
+            JOptionPane.showMessageDialog(null,"Produto indicado não contém estoque");
         }
     }     
    

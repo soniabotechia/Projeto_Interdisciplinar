@@ -124,4 +124,45 @@ public class TipoMovimentoDAO {
 			}
 		}
     }
+    
+    public void deletar(int idTipoMovimento) throws SQLException 
+    {
+        try 
+                {
+                    
+			conn = new Conexao().conectar();
+			ps = conn.prepareStatement( "DELETE FROM TIPO_MOVIMENTO WHERE tpmovIdTipoMovimento = ?");
+               
+                        ps.setLong(1, idTipoMovimento);
+                        ps.execute();
+                                                        
+                }
+                catch (SQLException e)
+                {
+                    System.out.println("Não foi possivel deletar no banco " + e.getMessage());
+                }
+                finally 
+                {
+			if (ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					System.out.println("Nao foi possivel fechar o Statement");
+				}
+			}
+			if (conn != null) 
+                        {
+				try 
+                                {
+					conn.close();
+                                }                                 
+                                catch (SQLException e)
+                                {
+					System.out.println("Não foi possivel fechar a conexao");
+				}
+			}
+		}
+    
+    
+    }
 }

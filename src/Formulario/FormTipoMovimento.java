@@ -7,7 +7,11 @@ package Formulario;
 
 import CashFlowBO.TipoMovimentoBO;
 import ClashFlowObjeto.TipoMovimento;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import view.TipoMovimentoModel;
 
 /**
@@ -16,6 +20,7 @@ import view.TipoMovimentoModel;
  */
 public class FormTipoMovimento extends javax.swing.JFrame {
 
+     private static final Logger logger = Logger.getLogger(FormTipoMovimento.class.getName());
     /**
      * Creates new form FormTipoMovimento
      */
@@ -43,12 +48,12 @@ public class FormTipoMovimento extends javax.swing.JFrame {
         btnAlterarMovimento = new javax.swing.JButton();
         btnExcluirMovimento = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        JtTipoMovimento = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 40)); // NOI18N
-        jLabel1.setText("     Tipo de Movimento");
+        jLabel1.setText("Tipo de Movimento");
 
         btnNovoMovimento.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnNovoMovimento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/btnNovo.png"))); // NOI18N
@@ -78,10 +83,10 @@ public class FormTipoMovimento extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jTable1.setModel(new TipoMovimentoModel(getTipoMovimento()));
-        jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_LAST_COLUMN);
-        jScrollPane1.setViewportView(jTable1);
+        JtTipoMovimento.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        JtTipoMovimento.setModel(new TipoMovimentoModel(getTipoMovimento()));
+        JtTipoMovimento.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_LAST_COLUMN);
+        jScrollPane1.setViewportView(JtTipoMovimento);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -93,18 +98,21 @@ public class FormTipoMovimento extends javax.swing.JFrame {
                     .addComponent(btnNovoMovimento, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAlterarMovimento, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnExcluirMovimento, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(30, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(79, 79, 79)
+                        .addComponent(jLabel1)))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jLabel1)
+                .addGap(62, 62, 62)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnNovoMovimento, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -113,7 +121,7 @@ public class FormTipoMovimento extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnExcluirMovimento, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(88, Short.MAX_VALUE))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
 
         pack();
@@ -133,7 +141,7 @@ public class FormTipoMovimento extends javax.swing.JFrame {
                 formNovoTipoMovimento.setVisible(false);
                 formNovoTipoMovimento = null;// limpando a memoria
                 //jogando dentro da variavel o TbModel para ser manipulado
-                TipoMovimentoModel tipoMovimentoModel = (TipoMovimentoModel) jTable1.getModel();
+                TipoMovimentoModel tipoMovimentoModel = (TipoMovimentoModel) JtTipoMovimento.getModel();
                 tipoMovimentoModel.addTipoMovimento(tipoMovimento);
                 tipoMovimentoModel.fireTableDataChanged();
             }                
@@ -145,7 +153,19 @@ public class FormTipoMovimento extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAlterarMovimentoActionPerformed
 
     private void btnExcluirMovimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirMovimentoActionPerformed
-
+        
+        TipoMovimentoBO tipoMovimentoBO = new TipoMovimentoBO();
+        int row = JtTipoMovimento.getSelectedRow();
+        TipoMovimento tipoMovimento = ((TipoMovimentoModel) JtTipoMovimento.getModel()).getValueAt(row);
+        try {
+            tipoMovimentoBO.del(tipoMovimento.getIdTipoMovimento());
+            TipoMovimentoModel tipoMovimentoModel = (TipoMovimentoModel) JtTipoMovimento.getModel();
+            tipoMovimentoModel.delTipoMovimento(tipoMovimento);
+            tipoMovimentoModel.fireTableDataChanged();
+            JOptionPane.showMessageDialog(null,"Item deletado com sucesso") ;
+        } catch (SQLException ex) {
+            Logger.getLogger(FormTipoMovimento.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnExcluirMovimentoActionPerformed
 
     /**
@@ -184,12 +204,12 @@ public class FormTipoMovimento extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable JtTipoMovimento;
     private javax.swing.JButton btnAlterarMovimento;
     private javax.swing.JButton btnExcluirMovimento;
     private javax.swing.JButton btnNovoMovimento;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
     private FormNovoTipoMovimento formNovoTipoMovimento;
 }

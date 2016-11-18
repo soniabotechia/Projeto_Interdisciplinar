@@ -23,11 +23,17 @@ public class TipoMovimentoModel extends AbstractTableModel{
         this.tipoMovimentos = new ArrayList<>();
     }
      
-     public TipoMovimentoModel(List<TipoMovimento> tipoMovimentos) {
+    public TipoMovimentoModel(List<TipoMovimento> tipoMovimentos) {
         this.tipoMovimentos = tipoMovimentos;
     }
-      public void addTipoMovimento(TipoMovimento tipomovimento){
-        tipoMovimentos.add(tipomovimento);
+    
+    public void addTipoMovimento(TipoMovimento tipoMovimento){
+        tipoMovimentos.add(tipoMovimento);
+    }
+    
+    public void delTipoMovimento(TipoMovimento tipoMovimento){
+        tipoMovimentos.remove(tipoMovimento);
+    
     }
      
      @Override
@@ -68,6 +74,10 @@ public class TipoMovimentoModel extends AbstractTableModel{
      @Override
     public String getColumnName(int column) {
         return colunas[column];
+    }
+
+    public TipoMovimento getValueAt(int rowIndex) {
+        return tipoMovimentos.get(rowIndex);
     }
     
     
