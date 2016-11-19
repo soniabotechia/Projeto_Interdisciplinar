@@ -41,6 +41,6 @@ public class LancamentosCaixaBO {
     }
     
     public List<LancamentosCaixa> buscarTodos() {
-        return lancamentosCaixaDAO.buscarTodos();
+        return lancamentosCaixaDAO.buscarTodosCaixaAberto();
     }
 }

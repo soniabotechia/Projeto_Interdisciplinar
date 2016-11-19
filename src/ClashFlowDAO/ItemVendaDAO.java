@@ -40,11 +40,11 @@ public class ItemVendaDAO {
                 ps.setLong(2, item.getVenda().getIdVenda());
                 ps.setInt(3, item.getQuantidade());
            
-                ps.executeQuery();
+                ps.execute();
             
             
         } catch (SQLException ex) {
-            logger.log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, "N\u00e3o foi possivel salvar no banco {0}", ex);
             throw new DAOException(ex);
         } finally {
             if (ps != null) {

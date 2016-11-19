@@ -104,7 +104,7 @@ public class GrupoProdutoDAO {
                 }
                 catch (SQLException e)
                 {
-                    logger.log(Level.SEVERE, "N\u00e3o foi possivel salvar no banco {0}", e.getMessage());
+                    logger.log(Level.SEVERE, "N\u00e3o foi possivel listar do banco {0}", e.getMessage());
                     return null;
                 }
                 finally 

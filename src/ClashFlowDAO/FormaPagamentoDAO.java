@@ -98,7 +98,7 @@ public class FormaPagamentoDAO {
                 }
                 catch (SQLException e)
                 {
-                    System.out.println("Não foi possivel salvar no banco " + e.getMessage());
+                    System.out.println("Não foi possivel listar do banco " + e.getMessage());
                     return null;
                 }
                 finally 

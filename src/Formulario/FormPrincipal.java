@@ -62,7 +62,6 @@ public class FormPrincipal extends javax.swing.JFrame {
         setTitle("CashFlow");
         setBackground(new java.awt.Color(0, 0, 0));
         setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        setMaximumSize(new java.awt.Dimension(536, 600));
 
         btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/btnSair.png"))); // NOI18N
         btnSair.setText("Sair");
@@ -179,6 +178,11 @@ public class FormPrincipal extends javax.swing.JFrame {
         jMenu3.setText("Usuário");
 
         jMenuItem9.setText("Cadastro de Usuário");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem9);
 
         jMenuItem10.setText("Tela de login");
@@ -243,38 +247,38 @@ public class FormPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVendas1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-      FormProduto frmProduto = new FormProduto();
-      frmProduto.setVisible(true);
+        FormProduto frmProduto = new FormProduto();
+        frmProduto.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-     FormGrupoProduto frmGrupoProduto = new FormGrupoProduto();
-     frmGrupoProduto.setVisible(true);
+        FormGrupoProduto frmGrupoProduto = new FormGrupoProduto();
+        frmGrupoProduto.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-     FormCaixa frmCaixa = new FormCaixa();
-     frmCaixa.setVisible(true);// TODO add your handling code here:
+        FormCaixa frmCaixa = new FormCaixa();
+        frmCaixa.setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-      FormCaixa frmCaixa = new FormCaixa();
-      frmCaixa.setVisible(true);
+        FormFechamentoCaixa frmFecha = new FormFechamentoCaixa();
+        frmFecha.setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-      FormTipoMovimento frmTipoMov = new FormTipoMovimento();
-      frmTipoMov.setVisible(true);
+        FormTipoMovimento frmTipoMov = new FormTipoMovimento();
+        frmTipoMov.setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-    FormFormaPagamento frmPagamento = new FormFormaPagamento();
-    frmPagamento.setVisible(true);
+        FormFormaPagamento frmPagamento = new FormFormaPagamento();
+        frmPagamento.setVisible(true);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-     FormLançamentosCaixa frmLancCaixa = new FormLançamentosCaixa();
-     frmLancCaixa.setVisible(true);
+        FormLançamentosCaixa frmLancCaixa = new FormLançamentosCaixa();
+        frmLancCaixa.setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void btnVendas1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnVendas1KeyPressed
@@ -283,6 +287,11 @@ public class FormPrincipal extends javax.swing.JFrame {
             form.setVisible(true);
         }
     }//GEN-LAST:event_btnVendas1KeyPressed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        FormUsuario frmUsu = new FormUsuario();
+        frmUsu.setVisible(true);
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     /**
      * @param args the command line arguments

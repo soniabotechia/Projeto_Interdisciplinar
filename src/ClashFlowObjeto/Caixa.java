@@ -6,6 +6,7 @@
 package ClashFlowObjeto;
 
 import java.util.Calendar;
+import java.util.List;
 
 /**
  *
@@ -18,7 +19,16 @@ public class Caixa {
     private double valorAbertura;
     private double valorFechamento;
     private Calendar dataFechamento;
+    private List<LancamentosCaixa> listaLancamento;
 
+    public List<LancamentosCaixa> getListaLancamento() {
+        return listaLancamento;
+    }
+
+    public void setListaLancamento(List<LancamentosCaixa> listaLancamento) {
+        this.listaLancamento = listaLancamento;
+    }
+    
     public Calendar getDataAbertura() {
         return dataAbertura;
     }

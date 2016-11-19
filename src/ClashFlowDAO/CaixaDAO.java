@@ -125,4 +125,45 @@ public class CaixaDAO {
     
     }
     
+    public void atualizaFechamento(Caixa cx) throws DAOException  {
+
+		try 
+                {
+                    
+			conn = new Conexao().conectar();
+			ps = conn.prepareStatement("UPDATE CAIXA set cxValorFechamento =?, cxDataFechamento =now() WHERE cxDataFechamento is null");
+                                                 
+                        ps.setDouble(1, cx.getValorFechamento());
+                        
+                        ps.execute();
+                                   
+                }
+                catch (SQLException e)
+                {
+                    logger.log(Level.SEVERE, "N\u00e3o foi possivel fechar no banco {0}", e.getMessage());
+                    throw new DAOException("Não foi possivel fechar no banco");
+                }
+                finally 
+                {
+			if (ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					logger.severe("Nao foi possivel fechar o Statement");
+				}
+			}
+			if (conn != null) 
+                        {
+				try 
+                                {
+					conn.close();
+                                }                                 
+                                catch (SQLException e)
+                                {
+					logger.severe("Não foi possivel fechar a conexao");
+				}
+			}
+		}
+    }
+    
 }

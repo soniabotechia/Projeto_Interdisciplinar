@@ -6,8 +6,11 @@
 package CashFlowBO;
 
 import ClashFlowDAO.CaixaDAO;
+import ClashFlowDAO.LancamentosCaixaDAO;
 import ClashFlowObjeto.Caixa;
+import ClashFlowObjeto.LancamentosCaixa;
 import exception.DAOException;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
 import javax.swing.JOptionPane;
 
@@ -17,16 +20,20 @@ import javax.swing.JOptionPane;
  */
 public class CaixaBO {
     
-    CaixaDAO caixaDAO;
+    private CaixaDAO caixaDAO;
+    private LancamentosCaixaDAO lancamentosCaixaDAO;
+    private double valorFechamento; 
     
     public CaixaBO()
     {
         caixaDAO = new CaixaDAO();
+        lancamentosCaixaDAO = new LancamentosCaixaDAO();
     }
     
     public void aberturaCaixa(Caixa cx) throws DAOException
     {
-        if(cx.getDataFechamento()== null){
+        
+        if(caixaDAO.buscarCaixaAberto() != null){
             JOptionPane.showMessageDialog(null,"Já existe um caixa aberto") ;
         }
         else{
@@ -40,4 +47,25 @@ public class CaixaBO {
         return caixaDAO.buscarCaixaAberto();
     }
     
+    public Double fechamentoCaixa() throws DAOException{
+        Caixa caixa = new Caixa();
+        CaixaDAO caixaDAO = new CaixaDAO();
+        
+        caixa.setListaLancamento(lancamentosCaixaDAO.buscarTodosCaixaAberto());
+        
+        
+        for(LancamentosCaixa lc : caixa.getListaLancamento()) {
+            
+            if(lc.getTipoMovimento().isCredito()){
+                valorFechamento += lc.getValorMovimento();
+            }
+            else{
+                valorFechamento -= lc.getValorMovimento();
+            }
+        }
+        
+        caixa.setValorFechamento(valorFechamento);
+        caixaDAO.atualizaFechamento(caixa);
+        return valorFechamento;
+   }
 }

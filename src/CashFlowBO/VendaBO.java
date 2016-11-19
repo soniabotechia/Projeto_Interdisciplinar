@@ -7,6 +7,7 @@ package CashFlowBO;
 
 import ClashFlowDAO.ItemVendaDAO;
 import ClashFlowDAO.LancamentosCaixaDAO;
+import ClashFlowDAO.ProdutoDAO;
 import ClashFlowDAO.VendaDAO;
 import ClashFlowObjeto.Caixa;
 import ClashFlowObjeto.ItemVenda;
@@ -34,6 +35,7 @@ public class VendaBO {
     private LancamentosCaixaDAO lancamentoCaixaDAO;
     private ItemVendaDAO itemVendaDAO;
     private CaixaBO caixaBO;
+    private ProdutoDAO produtoDAO;
     
     
     public VendaBO()
@@ -42,6 +44,7 @@ public class VendaBO {
        lancamentoCaixaDAO = new LancamentosCaixaDAO();
        itemVendaDAO = new ItemVendaDAO();
        caixaBO = new CaixaBO();
+       produtoDAO = new ProdutoDAO();
     }
     
     public void novaVenda(Venda venda) throws DAOException
@@ -53,11 +56,8 @@ public class VendaBO {
              JOptionPane.showMessageDialog(null,"Caixa Fechado");
              return;
         }
-        //pega cada item da lista de venda e seta um novo objeto ItemVenda
-        for(ItemVenda item : venda.getListaItem()) {
-            item.setVenda(venda);
-        }        
         
+             
         LancamentosCaixa lancamentoCaixa = new LancamentosCaixa();
                 
         lancamentoCaixa.setValorMovimento(venda.getTotalVenda());
@@ -76,12 +76,16 @@ public class VendaBO {
             
             lancamentoCaixaDAO.add(venda.getLancamento(), conn);
             vendaDAO.add(venda, conn);
-            
+           
             for(ItemVenda item : venda.getListaItem()) {
-                //validar estoque aki dentro!!
+                produtoDAO.attEstoque(item.getProduto(), -item.getQuantidade(), conn);
+                //pega cada item da lista de venda e seta um novo objeto ItemVenda
+                item.setVenda(venda);
+                //manda item a item pro DAO
                 itemVendaDAO.add(item, conn);
+                               
             }    
-            
+            JOptionPane.showMessageDialog(null,"Venda realizada!!");
             conn.commit();
             
         } catch(DAOException e) {

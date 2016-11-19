@@ -40,7 +40,7 @@ public class LancamentosCaixaDAO {
             conn = Conexao.conectar();
             this.add(lc, conn);
         } catch (SQLException ex) {
-            logger.log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, "N\u00e3o foi possivel salvar no banco {0}", ex);
         } finally {
             if (conn != null) {
                 try {
@@ -86,8 +86,8 @@ public class LancamentosCaixaDAO {
         }
 
     }
-
-    public List<LancamentosCaixa> buscarTodos() {
+    //buscando todos os movimentos do caixa que esta aberto.
+    public List<LancamentosCaixa> buscarTodosCaixaAberto() {
 
         try {
 

@@ -11,11 +11,14 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import utilitario.Conexao;
 import ClashFlowObjeto.Produto;
+import exception.DAOException;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import utilitario.DataUtil;
 /**
  *
@@ -23,7 +26,7 @@ import utilitario.DataUtil;
  */
 public class ProdutoDAO
 {
-    
+    private static final Logger logger = Logger.getLogger(ProdutoDAO.class.getName());
     private Connection conn;
     private PreparedStatement ps;
     private Statement st;
@@ -55,7 +58,7 @@ public class ProdutoDAO
                 }
                 catch (SQLException e)
                 {
-                    System.out.println("Não foi possivel salvar no banco " + e.getMessage());
+                    logger.log(Level.SEVERE, "N\u00e3o foi possivel salvar no banco {0}", e);
                 }
                 finally 
                 {
@@ -112,7 +115,7 @@ public class ProdutoDAO
                 }
                 catch (SQLException e)
                 {
-                    System.out.println("Não foi possivel salvar no banco " + e.getMessage());
+                    logger.log(Level.SEVERE, "N\u00e3o foi listar produtos todos no banco {0}", e);
                     return null;
                 }
                 finally 
@@ -168,7 +171,7 @@ public class ProdutoDAO
                 }
                 catch (SQLException e)
                 {
-                    System.out.println("Não foi possivel salvar no banco " + e.getMessage());
+                    logger.log(Level.SEVERE, "N\u00e3o foi listar produtos no banco {0}", e);
                     return null;
                 }
                 finally 
@@ -192,6 +195,31 @@ public class ProdutoDAO
 				}
 			}
 		}
+    }
+     
+    public void attEstoque(Produto produto, int novoEstoque, Connection conn) throws DAOException
+    {
+        try {
+            
+            ps = conn.prepareStatement("UPDATE PRODUTOS set prEstoque = prEstoque + ? WHERE prIdProduto =?");
+            
+                ps.setInt(1, novoEstoque);
+                ps.setLong(2, produto.getCodigoProduto());
+                ps.execute();
+            
+            
+        } catch (SQLException ex) {
+            logger.log(Level.SEVERE, "N\u00e3o foi atualizar estoque no banco {0}", ex);
+            throw new DAOException(ex);
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) {
+                    System.out.println("Nao foi possivel fechar o Statement");
+                }
+            }
+        }
     }
      
 }

@@ -299,7 +299,7 @@ public class FormNovaVenda extends javax.swing.JFrame {
         ItemVenda itemVenda = new ItemVenda();
         itemVenda.setProduto(produtoAtual);
         itemVenda.setQuantidade(Integer.parseInt(txtQuantidadeProduto.getText()));
-        
+        //verificanddo estoque do item
         if(produtoAtual.getEstoque()>= itemVenda.getQuantidade()){
             listaItem.add(itemVenda);
             valorTotal += ((Integer.parseInt(txtQuantidadeProduto.getText())) * produtoAtual.getPrecoVenda());
@@ -345,6 +345,7 @@ public class FormNovaVenda extends javax.swing.JFrame {
         venda.setPagamento((FormaPagamento) cBFormaPagamento.getSelectedItem());
         
         VendaBO vendaBO = new VendaBO();
+        
         try {
             vendaBO.novaVenda(venda);
         } catch (DAOException ex) {
