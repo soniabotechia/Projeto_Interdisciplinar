@@ -129,7 +129,7 @@ public class FormFechamentoCaixa extends javax.swing.JFrame {
     private void btnFecharCaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharCaixaActionPerformed
         
         CaixaBO caixaBO = new CaixaBO();
-        txtValorFechamento.setText((String.valueOf(caixaBO.fechamentoCaixa())));
+       // txtValorFechamento.setText((String.valueOf(caixaBO.fechamentoCaixa())));
         
     }//GEN-LAST:event_btnFecharCaixaActionPerformed
 
