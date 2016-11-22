@@ -36,7 +36,7 @@ public class GrupoProdutoBO {
     }
     public void del(int idGrupoProduto) throws SQLException
     {
-        GrupoProdutoDAO.deletar(idGrupoProduto);
+        grupoProdutoDAO.deletar(idGrupoProduto);
     }
     
 }   
