@@ -174,7 +174,7 @@ public class FormGrupoProduto extends javax.swing.JFrame {
         int row = jTable1.getSelectedRow();
         GrupoProduto grupoProduto = ((GrupoProdutoModel) jTable1.getModel()).getValueAt(row);
         try {
-            GrupoProdutoBO.del(grupoProduto.getIdGrupoProduto());
+            grupoProdutoBO.del(grupoProduto.getIdGrupoProduto());
             GrupoProdutoModel grupoProdutoModel = (GrupoProdutoModel) jTable1.getModel();
             grupoProdutoModel.delGrupoProduto(grupoProduto);
             grupoProdutoModel.fireTableDataChanged();
