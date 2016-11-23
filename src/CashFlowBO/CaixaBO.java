@@ -32,7 +32,7 @@ public class CaixaBO {
     
     public void aberturaCaixa(Caixa cx) throws DAOException
     {
-        
+        //verifica se existe caixa aberto e notifica usuario, senao abre novo caixa
         if(caixaDAO.buscarCaixaAberto() != null){
             JOptionPane.showMessageDialog(null,"Já existe um caixa aberto") ;
         }
@@ -42,19 +42,20 @@ public class CaixaBO {
 
         }
     }     
-    
+    //chama funçao que verifica se o caixa esta aberto
     public Caixa buscarCaixaAberto() throws DAOException {
         return caixaDAO.buscarCaixaAberto();
     }
     
-    public Double fechamentoCaixa() throws DAOException{
-        Caixa caixa = new Caixa();
+    public Double fechamentoCaixa(Caixa cx) throws DAOException{
+        
         CaixaDAO caixaDAO = new CaixaDAO();
         
-        caixa.setListaLancamento(lancamentosCaixaDAO.buscarTodosCaixaAberto());
+        cx.setListaLancamento(lancamentosCaixaDAO.buscarTodosCaixaAberto());
+        valorFechamento = cx.getValorAbertura();
+        System.out.println(valorFechamento);
         
-        
-        for(LancamentosCaixa lc : caixa.getListaLancamento()) {
+        for(LancamentosCaixa lc : cx.getListaLancamento()) {
             
             if(lc.getTipoMovimento().isCredito()){
                 valorFechamento += lc.getValorMovimento();
@@ -63,9 +64,9 @@ public class CaixaBO {
                 valorFechamento -= lc.getValorMovimento();
             }
         }
-        
-        caixa.setValorFechamento(valorFechamento);
-        caixaDAO.atualizaFechamento(caixa);
-        return valorFechamento;
+         
+        cx.setValorFechamento( valorFechamento);
+        caixaDAO.atualizaFechamento(cx);
+        return ( valorFechamento );
    }
 }

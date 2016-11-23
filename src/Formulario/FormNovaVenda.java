@@ -94,7 +94,7 @@ public class FormNovaVenda extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CashFlow - Nova Venda");
 
-        txtQuantidadeProduto.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        txtQuantidadeProduto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel2.setText("Código:");

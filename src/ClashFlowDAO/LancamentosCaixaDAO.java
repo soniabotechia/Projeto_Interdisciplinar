@@ -94,31 +94,25 @@ public class LancamentosCaixaDAO {
             conn = Conexao.conectar();
             st = conn.createStatement();
 
-            rs = st.executeQuery("select m.lcIdLancamento, m.lcData, m.lcValor, m.lcObservacao, t.tpmovDescricaoMovimento, t.tpmovCredito\n"
-                    + "\n"
-                    + "from lancamento_caixa m\n"
-                    + "\n"
-                    + "inner join caixa c on c.cxIdCaixa = m.cxIdCaixa\n"
-                    + "\n"
-                    + "inner join tipo_movimento t on t.tpmovIdTipoMovimento = m.tpmovIdTipoMovimento\n"
-                    + "\n"
-                    + "where c.cxDataFechamento is null\n"
-                    + "\n"
-                    + "order by m.lcIdLancamento");
+            rs = st.executeQuery("select * from lancamento");
 
             List<LancamentosCaixa> lancamentosCaixa = new ArrayList<>();
 
             while (rs.next()) {
 
                 TipoMovimento tm = new TipoMovimento();
+                FormaPagamento pg = new FormaPagamento();
                 tm.setCredito(rs.getBoolean("tpmovCredito"));
 
+                pg.setPagDescricaoPagamento(rs.getString("pagDescricaoPagamento"));
+                
                 LancamentosCaixa lc = new LancamentosCaixa();
                 lc.setIdlancamentoCaixa(rs.getInt("lcIdLancamento"));
                 lc.setObservacao(rs.getString("lcObservacao"));
                 lc.setTipoMovimento(tm);
                 lc.setValorMovimento(rs.getDouble("lcValor"));
                 lc.setDataMovimento(DataUtil.parseDate(rs.getDate("lcData")));
+                lc.setFormaPagamento(pg);
 
                 lancamentosCaixa.add(lc);
             }
@@ -145,5 +139,6 @@ public class LancamentosCaixaDAO {
             }
         }
     }
+    
 
 }
