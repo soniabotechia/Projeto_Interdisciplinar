@@ -30,6 +30,13 @@ public class GrupoProdutoModel  extends AbstractTableModel{
     public GrupoProdutoModel(List<GrupoProduto> grupoProdutos) {
         this.grupoProdutos = grupoProdutos;
     }
+     public void addGrupoProduto(GrupoProduto grupoproduto){
+        grupoProdutos.add(grupoproduto);
+    }
+     public void delGrupoProduto(GrupoProduto grupoproduto){
+       grupoProdutos.remove(grupoproduto);
+    
+    }
     
     @Override
     public int getRowCount() {
@@ -65,6 +72,9 @@ public class GrupoProdutoModel  extends AbstractTableModel{
         return colunas[column];
     }
     
+    public GrupoProduto getValueAt(int rowIndex) {
+        return grupoProdutos.get(rowIndex);
+    }
 }
 
 

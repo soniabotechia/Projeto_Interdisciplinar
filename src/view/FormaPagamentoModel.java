@@ -36,6 +36,10 @@ public class FormaPagamentoModel  extends AbstractTableModel{
     public void addFormaPagamento(FormaPagamento formaPagamento){
         formaPagamentos.add(formaPagamento);
     }
+     public void delFormaPagamento(FormaPagamento formaPagamento){
+        formaPagamentos.remove(formaPagamento);
+    
+    }
             
    
     @Override
@@ -74,6 +78,9 @@ public class FormaPagamentoModel  extends AbstractTableModel{
      @Override
     public String getColumnName(int column) {
         return colunas[column];
+    }
+    public FormaPagamento getValueAt(int rowIndex) {
+    return formaPagamentos.get(rowIndex);
     }
     
 }

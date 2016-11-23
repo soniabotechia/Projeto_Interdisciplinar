@@ -9,6 +9,7 @@ import ClashFlowDAO.GrupoProdutoDAO;
 
 import ClashFlowObjeto.GrupoProduto;
 import exception.DAOException;
+import java.sql.SQLException;
 import java.util.List;
 
 
@@ -32,6 +33,10 @@ public class GrupoProdutoBO {
     
     public List<GrupoProduto> buscarTodos() {
         return grupoProdutoDAO.buscarTodos();
+    }
+    public void del(int idGrupoProduto) throws SQLException
+    {
+        grupoProdutoDAO.deletar(idGrupoProduto);
     }
     
 }   

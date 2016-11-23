@@ -221,5 +221,45 @@ public class ProdutoDAO
             }
         }
     }
+    public void deletar(int codigoProduto) throws SQLException 
+    {
+        try 
+                {
+                    
+			conn = new Conexao().conectar();
+			ps = conn.prepareStatement( "DELETE FROM PRODUTOS WHERE prIdProduto = ?");
+               
+                        ps.setLong(1,codigoProduto);
+                        ps.execute();
+                                                        
+                }
+                catch (SQLException e)
+                {
+                    System.out.println("Não foi possivel deletar no banco " + e.getMessage());
+                }
+                finally 
+                {
+			if (ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					System.out.println("Nao foi possivel fechar o Statement");
+				}
+			}
+			if (conn != null) 
+                        {
+				try 
+                                {
+					conn.close();
+                                }                                 
+                                catch (SQLException e)
+                                {
+					System.out.println("Não foi possivel fechar a conexao");
+				}
+			}
+		}
+    
+    
+    }
      
 }

@@ -9,7 +9,11 @@ import CashFlowBO.GrupoProdutoBO;
 import CashFlowBO.ProdutoBO;
 import ClashFlowObjeto.GrupoProduto;
 import ClashFlowObjeto.Produto;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import view.GrupoProdutoModel;
 
 /**
@@ -17,7 +21,7 @@ import view.GrupoProdutoModel;
  * @author Sonia
  */
 public class FormGrupoProduto extends javax.swing.JFrame {
-
+    private static final Logger logger = Logger.getLogger(FormTipoMovimento.class.getName());
     /**
      * Creates new form FormGrupoProduto
      */
@@ -143,18 +147,41 @@ public class FormGrupoProduto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-        FormNovoGrupo formNewPro = new FormNovoGrupo();
-        formNewPro.setVisible(true);
+       formNovoGrupo = new FormNovoGrupo(this.callbackGP());
+       formNovoGrupo.setVisible(true);
 
     }//GEN-LAST:event_btnNovoActionPerformed
-
+     
+     private CallbackForm callbackGP(){
+        return new CallbackForm<GrupoProduto>(){
+             @Override       
+             public void fim(GrupoProduto grupoProduto){
+                formNovoGrupo.setVisible(false);
+                formNovoGrupo = null;// limpando a memoria
+                //jogando dentro da variavel o TbModel para ser manipulado
+               GrupoProdutoModel grupoProdutoModel = (GrupoProdutoModel) jTable1.getModel();
+               grupoProdutoModel.addGrupoProduto(grupoProduto);
+               grupoProdutoModel.fireTableDataChanged();
+            }                
+        };
+    }
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-        FormAlterarProduto formAltPro = new FormAlterarProduto();
-        formAltPro.setVisible(true);
+        
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-
+        GrupoProdutoBO grupoProdutoBO = new GrupoProdutoBO();
+        int row = jTable1.getSelectedRow();
+        GrupoProduto grupoProduto = ((GrupoProdutoModel) jTable1.getModel()).getValueAt(row);
+        try {
+            grupoProdutoBO.del(grupoProduto.getIdGrupoProduto());
+            GrupoProdutoModel grupoProdutoModel = (GrupoProdutoModel) jTable1.getModel();
+            grupoProdutoModel.delGrupoProduto(grupoProduto);
+            grupoProdutoModel.fireTableDataChanged();
+            JOptionPane.showMessageDialog(null,"Item deletado com sucesso") ;
+        } catch (SQLException ex) {
+            Logger.getLogger(FormTipoMovimento.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     /**
@@ -202,4 +229,5 @@ public class FormGrupoProduto extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
+    private FormNovoGrupo formNovoGrupo;
 }

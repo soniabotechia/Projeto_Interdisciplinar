@@ -17,6 +17,12 @@ public class GrupoProduto {
     private String DescricaoGrupo;
     private Calendar dataCadastro;
 
+     public GrupoProduto(int idGrupoProduto) {
+        this.idGrupoProduto = idGrupoProduto;
+    }
+     public GrupoProduto(){
+    
+    }
     public int getIdGrupoProduto() {
         return idGrupoProduto;
     }

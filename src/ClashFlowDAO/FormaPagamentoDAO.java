@@ -123,5 +123,45 @@ public class FormaPagamentoDAO {
 			}
 		}
     }
+     public void deletar(int pagIdFormaPagamento) throws SQLException 
+    {
+        try 
+                {
+                    
+			conn = new Conexao().conectar();
+			ps = conn.prepareStatement( "DELETE FROM FORMA_PAGAMENTO WHERE pagIdFormaPagamento = ?");
+               
+                        ps.setLong(1, pagIdFormaPagamento);
+                        ps.execute();
+                                                        
+                }
+                catch (SQLException e)
+                {
+                    System.out.println("Não foi possivel deletar no banco " + e.getMessage());
+                }
+                finally 
+                {
+			if (ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					System.out.println("Nao foi possivel fechar o Statement");
+				}
+			}
+			if (conn != null) 
+                        {
+				try 
+                                {
+					conn.close();
+                                }                                 
+                                catch (SQLException e)
+                                {
+					System.out.println("Não foi possivel fechar a conexao");
+				}
+			}
+		}
+    
+    
+    }
     
 }

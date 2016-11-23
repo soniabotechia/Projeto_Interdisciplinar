@@ -129,6 +129,46 @@ public class GrupoProdutoDAO {
 			}
 		}
     }
+      public void deletar(int idGrupoProduto) throws SQLException 
+    {
+        try 
+                {
+                    
+			conn = new Conexao().conectar();
+			ps = conn.prepareStatement( "DELETE FROM GRUPOS_PRODUTOS WHERE gpIdGrupoProduto = ?");
+               
+                        ps.setLong(1, idGrupoProduto);
+                        ps.execute();
+                                                        
+                }
+                catch (SQLException e)
+                {
+                    System.out.println("Não foi possivel deletar no banco " + e.getMessage());
+                }
+                finally 
+                {
+			if (ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					System.out.println("Nao foi possivel fechar o Statement");
+				}
+			}
+			if (conn != null) 
+                        {
+				try 
+                                {
+					conn.close();
+                                }                                 
+                                catch (SQLException e)
+                                {
+					System.out.println("Não foi possivel fechar a conexao");
+				}
+			}
+		}
+    
+    
+    }
 
     
 }

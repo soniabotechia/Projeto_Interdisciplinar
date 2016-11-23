@@ -7,7 +7,11 @@ package Formulario;
 
 import CashFlowBO.ProdutoBO;
 import ClashFlowObjeto.Produto;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 import javax.swing.JTable;
 import view.ProdutoTableModel;
@@ -183,7 +187,18 @@ public class FormProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-   
+        ProdutoBO produtoBO = new ProdutoBO();
+        int row = jTable1.getSelectedRow();
+        Produto produto = ((ProdutoTableModel) jTable1.getModel()).getValueAt(row);
+        try {
+            produtoBO.del((int) produto.getCodigoProduto());
+            ProdutoTableModel produtoModel = (ProdutoTableModel) jTable1.getModel();
+            produtoModel.delProduto(produto);
+            produtoModel.fireTableDataChanged();
+            JOptionPane.showMessageDialog(null,"Item deletado com sucesso") ;
+        } catch (SQLException ex) {
+            Logger.getLogger(FormTipoMovimento.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     
