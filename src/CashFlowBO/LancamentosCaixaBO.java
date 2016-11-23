@@ -51,9 +51,9 @@ public class LancamentosCaixaBO {
         
         // ietrar por todos os lançamento
         Double atual = resumo.get("Dinheiro");
-        atual += valor;
+       // atual += valor;
         resumo.put("Dinheiro", atual);
-        resumo.
+       // resumo.
         
         return resumo;
     }
