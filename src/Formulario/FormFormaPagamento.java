@@ -7,7 +7,11 @@ package Formulario;
 
 import CashFlowBO.FormaPagamentoBO;
 import ClashFlowObjeto.FormaPagamento;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import view.FormaPagamentoModel;
 
 /**
@@ -158,7 +162,18 @@ public class FormFormaPagamento extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-
+        FormaPagamentoBO formapagamentoBO = new FormaPagamentoBO();
+        int row = TbFormaPagamento.getSelectedRow();
+        FormaPagamento formapagamento = ((FormaPagamentoModel) TbFormaPagamento.getModel()).getValueAt(row);
+        try {
+            formapagamentoBO.del(formapagamento.getPagIdFormaPagamento());
+            FormaPagamentoModel formaPagamentoModel = (FormaPagamentoModel) TbFormaPagamento.getModel();
+            formaPagamentoModel.delFormaPagamento(formapagamento);
+            formaPagamentoModel.fireTableDataChanged();
+            JOptionPane.showMessageDialog(null,"Item deletado com sucesso") ;
+        } catch (SQLException ex) {
+            Logger.getLogger(FormTipoMovimento.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     /**

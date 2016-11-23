@@ -8,6 +8,7 @@ package CashFlowBO;
 import ClashFlowDAO.FormaPagamentoDAO;
 import ClashFlowObjeto.FormaPagamento;
 import exception.DAOException;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -29,5 +30,9 @@ public class FormaPagamentoBO {
     
     public List<FormaPagamento> buscarTodos() {
         return formaPagamentoDAO.buscarTodos();
+    }
+     public void del(int pagIdFormaPagamento) throws SQLException
+    {
+        formaPagamentoDAO.deletar(pagIdFormaPagamento);
     }
 }

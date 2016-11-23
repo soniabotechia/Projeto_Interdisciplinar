@@ -31,6 +31,10 @@ public class ProdutoTableModel extends AbstractTableModel {
     public void addProduto(Produto produto){
        produtos.add(produto);
     }
+    public void delProduto(Produto produto){
+     produtos.remove(produto);
+    
+    }
     @Override
     public int getRowCount() {
         return produtos.size();

@@ -135,7 +135,7 @@ public class GrupoProdutoDAO {
                 {
                     
 			conn = new Conexao().conectar();
-			ps = conn.prepareStatement( "DELETE FROM GRUPO_PRODUTOS WHERE gpIdGrupoProduto = ?");
+			ps = conn.prepareStatement( "DELETE FROM GRUPOS_PRODUTOS WHERE gpIdGrupoProduto = ?");
                
                         ps.setLong(1, idGrupoProduto);
                         ps.execute();

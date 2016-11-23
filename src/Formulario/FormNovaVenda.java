@@ -307,16 +307,20 @@ public class FormNovaVenda extends javax.swing.JFrame {
         }
         else
         {
-            JOptionPane.showMessageDialog(null,"Produto indicado não contém estoque");
+            JOptionPane.showMessageDialog(null,"Produto indicado não contém estoque!");
         }
     }     
    
     private void btnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirActionPerformed
-        
+        if(txtQuantidadeProduto.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null, "Insira a quantidade de produtos!");
+        }
+        else{
         adicionaItem();
         jTItemVenda.setModel(new ItemVendaModel(listaItem));
         jTItemVenda.repaint();
-         
+        }
     }//GEN-LAST:event_btnIncluirActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
