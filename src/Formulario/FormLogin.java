@@ -23,6 +23,7 @@ public class FormLogin extends javax.swing.JFrame {
      */
     public FormLogin() {
         initComponents();
+        getRootPane().setDefaultButton(btnLogar);
     }
 
     /**
@@ -140,11 +141,10 @@ public class FormLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLogarActionPerformed
 
     private void btnLogarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnLogarKeyPressed
-        if(evt.getKeyChar() == KeyEvent.VK_ENTER) 
-        {
+        
             FormMain form = new FormMain();
             form.setVisible(true);
-        }
+        
         /*if(evt.getKeyCode() == KeyEvent.VK_F2){
           FormProduto form = new FormProduto();
           form.setVisible(true);  

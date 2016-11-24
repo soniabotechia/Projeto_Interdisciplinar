@@ -149,7 +149,7 @@ public class ProdutoDAO
 			conn = new Conexao().conectar();
 			st = conn.createStatement();
                         ps = conn.prepareStatement("SELECT * FROM produtos where prDescricaoProduto like ?");
-                        ps.setString(1, nome + "%");
+                        ps.setString(1, "%" + nome + "%");
                         rs = ps.executeQuery();
                         
                         List<Produto> produtos = new ArrayList<>();
