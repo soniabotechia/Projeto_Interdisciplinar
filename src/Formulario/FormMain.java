@@ -264,13 +264,13 @@ public class FormMain extends javax.swing.JFrame {
 
     private void btnVendas1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnVendas1KeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_F1) {
-            FormVenda form = new FormVenda();
+            FormNovaVenda form = new FormNovaVenda();
             form.setVisible(true);
         }
     }//GEN-LAST:event_btnVendas1KeyPressed
 
     private void btnVendas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendas1ActionPerformed
-        FormVenda form = new FormVenda();
+        FormNovaVenda form = new FormNovaVenda();
         form.setVisible(true);
     }//GEN-LAST:event_btnVendas1ActionPerformed
 

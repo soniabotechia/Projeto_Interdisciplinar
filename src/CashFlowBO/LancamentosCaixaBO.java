@@ -45,16 +45,5 @@ public class LancamentosCaixaBO {
     public List<LancamentosCaixa> buscarTodos() {
         return lancamentosCaixaDAO.buscarTodosCaixaAberto();
     }
-    
-    public Map<String, Double> resumirLancamentosCaixaAberto() {
-        Map<String, Double> resumo = new HashMap<>();
-        
-        // ietrar por todos os lançamento
-        Double atual = resumo.get("Dinheiro");
-       // atual += valor;
-        resumo.put("Dinheiro", atual);
-       // resumo.
-        
-        return resumo;
-    }
+
 }

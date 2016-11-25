@@ -51,6 +51,7 @@ public class FormFormaPagamento extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         TbFormaPagamento.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         TbFormaPagamento.setModel(new FormaPagamentoModel(getFormaPagamento()));
