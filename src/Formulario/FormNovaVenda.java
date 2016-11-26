@@ -49,8 +49,6 @@ public class FormNovaVenda extends javax.swing.JFrame {
      */
     public FormNovaVenda() {
         initComponents();
-        
-        //jFormattedTextField1.setFormatterFactory(new DefaultFormatterFactory(getFormatoMoeda()));
     }
     
     private FormaPagamento[] carregaFormas() {
