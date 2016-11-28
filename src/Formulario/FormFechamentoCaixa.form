@@ -112,6 +112,9 @@
               <Connection code="new FechamentoCaixaModel(getLancamentoCaixa())" type="code"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="FormFechamentoCaixa_TbFechamentoCaixa"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
