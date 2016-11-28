@@ -332,6 +332,7 @@
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JFormattedTextField(getFormatoMoeda())"/>
+        <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="FormNovaVenda_txtValorTotal"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="txtValorPago">
