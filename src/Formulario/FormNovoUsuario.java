@@ -7,6 +7,7 @@ package Formulario;
 
 import CashFlowBO.UsuarioBO;
 import ClashFlowObjeto.Usuario;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -51,7 +52,7 @@ public class FormNovoUsuario extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Inclusão de Usuário");
+        jLabel1.setText("Cadastro");
 
         txtNome.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
 
@@ -88,18 +89,18 @@ public class FormNovoUsuario extends javax.swing.JFrame {
                                         .addGap(76, 76, 76)
                                         .addComponent(jLabel11))
                                     .addComponent(jLabel10))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNome, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(txtNome, javax.swing.GroupLayout.Alignment.TRAILING)))))
+                                        .addGap(0, 0, Short.MAX_VALUE))))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
+                        .addGap(51, 51, 51)
                         .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35)))
+                        .addGap(28, 28, 28)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -115,11 +116,11 @@ public class FormNovoUsuario extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28))
+                .addGap(20, 20, 20))
         );
 
         pack();
@@ -128,11 +129,26 @@ public class FormNovoUsuario extends javax.swing.JFrame {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         Usuario usu = new Usuario();
-        usu.setUsuario(txtNome.getText());
-        usu.setSenha(String.valueOf(txtSenha.getPassword()));
+        if(txtNome.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null, "Insira o usuário!");
+        }
+        if(txtSenha.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null, "Insira a senha");
+        }
+        else{
         
-        UsuarioBO usuBO = new UsuarioBO();
-        usuBO.salvar(usu);
+            usu.setUsuario(txtNome.getText());
+            usu.setSenha(String.valueOf(txtSenha.getPassword()));
+
+            UsuarioBO usuBO = new UsuarioBO();
+            usuBO.salvar(usu);
+            JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso");
+            btnSairActionPerformed(evt);
+         
+        }
+        
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
