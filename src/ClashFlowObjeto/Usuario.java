@@ -16,6 +16,15 @@ public class Usuario {
     private String status;
     private String ativo;
 
+    public int getIdusuario() {
+        return idusuario;
+    }
+
+    public void setIdusuario(int idusuario) {
+        this.idusuario = idusuario;
+    }
+    private int idusuario;
+
     public String getUsuario() {
         return usuario;
     }
