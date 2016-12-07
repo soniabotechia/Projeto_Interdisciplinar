@@ -5,18 +5,28 @@
  */
 package Formulario;
 
+import ClashFlowObjeto.Produto;
+
 /**
  *
  * @author Caio Henrique
  */
 public class FormAlterarProduto extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FormAlterarPr
-     */
-    public FormAlterarProduto() {
-        initComponents();
+    private CallbackForm<Produto> callbackForm; 
+    
+    public FormAlterarProduto(){
+            this(null);
     }
+    
+    public FormAlterarProduto(CallbackForm<Produto> callbackForm) {
+        init(callbackForm);
+    }
+    
+    private void init(CallbackForm<Produto> callbackForm){
+        this.callbackForm = callbackForm;
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -52,24 +62,24 @@ public class FormAlterarProduto extends javax.swing.JFrame {
         ABAS2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         ABAS3 = new javax.swing.JPanel();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
+        cBGrupoProduto = new javax.swing.JComboBox<>();
+        txtObservacao = new javax.swing.JTextField();
+        txtDescricao = new javax.swing.JTextField();
+        txtQuantidade = new javax.swing.JTextField();
+        txtPrecoVenda = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jTextField13 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
+        btnMaisGrupoProduto = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jTextField14 = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
+        txtPrecoCompra = new javax.swing.JTextField();
+        btnAlterar = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
-        jLabel28 = new javax.swing.JLabel();
+        txtDataCadastro = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
@@ -184,20 +194,20 @@ public class FormAlterarProduto extends javax.swing.JFrame {
 
         ABAS3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Acessórios", "Eletrônicos", "Material Escolar", " " }));
-        ABAS3.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, 120, 20));
+        cBGrupoProduto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Acessórios", "Eletrônicos", "Material Escolar", " " }));
+        ABAS3.add(cBGrupoProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, 120, 20));
 
-        jTextField8.setText("2GB");
-        ABAS3.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 150, -1));
+        txtObservacao.setText("2GB");
+        ABAS3.add(txtObservacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 150, -1));
 
-        jTextField9.setText("Memória RAM");
-        ABAS3.add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 150, -1));
+        txtDescricao.setText("Memória RAM");
+        ABAS3.add(txtDescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 150, -1));
 
-        jTextField10.setText("2");
-        ABAS3.add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, 70, -1));
+        txtQuantidade.setText("2");
+        ABAS3.add(txtQuantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, 70, -1));
 
-        jTextField11.setText("79,90");
-        ABAS3.add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 80, -1));
+        txtPrecoVenda.setText("79,90");
+        ABAS3.add(txtPrecoVenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 80, -1));
 
         jLabel9.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel9.setText("Descrição:");
@@ -218,9 +228,9 @@ public class FormAlterarProduto extends javax.swing.JFrame {
         jTextField13.setText("jTextField1");
         ABAS3.add(jTextField13, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 150, -1));
 
-        jButton3.setFont(new java.awt.Font("Tahoma", 0, 8)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/MAIS.png"))); // NOI18N
-        ABAS3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 270, 30, 20));
+        btnMaisGrupoProduto.setFont(new java.awt.Font("Tahoma", 0, 8)); // NOI18N
+        btnMaisGrupoProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/MAIS.png"))); // NOI18N
+        ABAS3.add(btnMaisGrupoProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 270, 30, 20));
 
         jLabel14.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel14.setText("Grupo de Produto:");
@@ -229,19 +239,24 @@ public class FormAlterarProduto extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel15.setText("Preço de Compra:");
 
-        jTextField14.setText("49,80");
+        txtPrecoCompra.setText("49,80");
 
-        jButton4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/btnSalvar.png"))); // NOI18N
-        jButton4.setText("Salvar");
+        btnAlterar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/btnSalvar.png"))); // NOI18N
+        btnAlterar.setText("Salvar");
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
 
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/product.png"))); // NOI18N
 
         jLabel27.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel27.setText("Dada de Cadastro:");
 
-        jLabel28.setText("13/10/2016");
-        jLabel28.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtDataCadastro.setText("13/10/2016");
+        txtDataCadastro.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout ABAS2Layout = new javax.swing.GroupLayout(ABAS2);
         ABAS2.setLayout(ABAS2Layout);
@@ -259,19 +274,19 @@ public class FormAlterarProduto extends javax.swing.JFrame {
                                 .addGap(31, 31, 31)
                                 .addComponent(jLabel15)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtPrecoCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(36, 36, 36)
                         .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(92, 92, 92))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ABAS2Layout.createSequentialGroup()
-                        .addComponent(jButton4)
+                        .addComponent(btnAlterar)
                         .addGap(209, 209, 209))))
             .addGroup(ABAS2Layout.createSequentialGroup()
                 .addComponent(ABAS3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
                 .addComponent(jLabel27)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel28)
+                .addComponent(txtDataCadastro)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         ABAS2Layout.setVerticalGroup(
@@ -284,17 +299,17 @@ public class FormAlterarProduto extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(ABAS2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtDataCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(ABAS3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(ABAS2Layout.createSequentialGroup()
                         .addGap(108, 108, 108)
                         .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(43, 43, 43)
                 .addGroup(ABAS2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPrecoCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton4)
+                .addComponent(btnAlterar)
                 .addContainerGap(73, Short.MAX_VALUE))
         );
 
@@ -487,6 +502,11 @@ public class FormAlterarProduto extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+       
+        
+    }//GEN-LAST:event_btnAlterarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -528,13 +548,13 @@ public class FormAlterarProduto extends javax.swing.JFrame {
     private javax.swing.JPanel ABAS1;
     private javax.swing.JPanel ABAS2;
     private javax.swing.JPanel ABAS3;
+    private javax.swing.JButton btnAlterar;
+    private javax.swing.JButton btnMaisGrupoProduto;
+    private javax.swing.JComboBox<String> cBGrupoProduto;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -554,7 +574,6 @@ public class FormAlterarProduto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -567,10 +586,7 @@ public class FormAlterarProduto extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField14;
     private javax.swing.JTextField jTextField15;
     private javax.swing.JTextField jTextField16;
     private javax.swing.JTextField jTextField17;
@@ -585,7 +601,11 @@ public class FormAlterarProduto extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JLabel txtDataCadastro;
+    private javax.swing.JTextField txtDescricao;
+    private javax.swing.JTextField txtObservacao;
+    private javax.swing.JTextField txtPrecoCompra;
+    private javax.swing.JTextField txtPrecoVenda;
+    private javax.swing.JTextField txtQuantidade;
     // End of variables declaration//GEN-END:variables
 }

@@ -22,13 +22,26 @@ import view.ProdutoTableModel;
  */
 public class FormProduto extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FrmPrincipal
-     */
-    public FormProduto() {
-        initComponents();
+    // inicializando o callback que enviara o produto para o form alterarProduto
+    private CallbackForm<Produto> callbackP;
+    public FormProduto(){
+    
+        this(null);
+    }
+    
+    public FormProduto(CallbackForm<Produto> callbackProduto) {
+       
+        init(callbackProduto);
        
     }
+    
+    public void init(CallbackForm<Produto> callbackProduto){
+        initComponents();
+        this.callbackP = callbackProduto;
+        
+    }
+
+   
     
     private List<Produto> getProdutos() {
     
@@ -50,7 +63,7 @@ public class FormProduto extends javax.swing.JFrame {
         btnExcluir = new javax.swing.JButton();
         lblIcone = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TbProduto = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         txtConsulta = new javax.swing.JTextField();
         btnPesquisar = new javax.swing.JButton();
@@ -91,10 +104,10 @@ public class FormProduto extends javax.swing.JFrame {
 
         lblIcone.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/product_1.png"))); // NOI18N
 
-        jTable1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jTable1.setModel(new ProdutoTableModel(getProdutos()));
-        jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_LAST_COLUMN);
-        jScrollPane1.setViewportView(jTable1);
+        TbProduto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        TbProduto.setModel(new ProdutoTableModel(getProdutos()));
+        TbProduto.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_LAST_COLUMN);
+        jScrollPane1.setViewportView(TbProduto);
 
         txtConsulta.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         txtConsulta.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -176,31 +189,52 @@ public class FormProduto extends javax.swing.JFrame {
         formNovoProduto.setVisible(true); //parei aq
     }//GEN-LAST:event_btnNovoActionPerformed
 
-     private CallbackForm callbackProd(){
+    private CallbackForm callbackProd(){
         return new CallbackForm<Produto>(){
              @Override       
              public void fim(Produto produto){
                 formNovoProduto.setVisible(false);
                 formNovoProduto = null;// limpando a memoria
                 //jogando dentro da variavel o TbModel para ser manipulado
-                ProdutoTableModel produtoTableModel = (ProdutoTableModel) jTable1.getModel();
+                ProdutoTableModel produtoTableModel = (ProdutoTableModel) TbProduto.getModel();
                 produtoTableModel.addProduto(produto);
                 produtoTableModel.fireTableDataChanged();
             }                
         };
     }
+     
+    private CallbackForm callbackAlterar(){
+        return new CallbackForm<Produto>(){
+            @Override
+            public void fim(Produto produto){
+            
+            }
+        };
+                
+    
+    }
+    
+    
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-        FormAlterarProduto formAltPro = new FormAlterarProduto();
+       
+        
+        int row = TbProduto.getSelectedRow();
+        Produto p = ((ProdutoTableModel)TbProduto.getModel()).getValueAt(row);
+        FormAlterarProduto formAltPro = new FormAlterarProduto(this.callbackAlterar());
         formAltPro.setVisible(true);
+        if(callbackP != null){
+            callbackP.fim(p);
+        }
+        
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         ProdutoBO produtoBO = new ProdutoBO();
-        int row = jTable1.getSelectedRow();
-        Produto produto = ((ProdutoTableModel) jTable1.getModel()).getValueAt(row);
+        int row = TbProduto.getSelectedRow();
+        Produto produto = ((ProdutoTableModel) TbProduto.getModel()).getValueAt(row);
         try {
             produtoBO.del((int) produto.getCodigoProduto());
-            ProdutoTableModel produtoModel = (ProdutoTableModel) jTable1.getModel();
+            ProdutoTableModel produtoModel = (ProdutoTableModel) TbProduto.getModel();
             produtoModel.delProduto(produto);
             produtoModel.fireTableDataChanged();
             JOptionPane.showMessageDialog(null,"Item deletado com sucesso") ;
@@ -215,8 +249,8 @@ public class FormProduto extends javax.swing.JFrame {
              
         ProdutoBO produtoBO = new ProdutoBO();
         List<Produto> produtos = produtoBO.pesquisa(nome);
-        jTable1.setModel(new ProdutoTableModel(produtos));
-        jTable1.repaint();        // TODO add your handling code here:
+        TbProduto.setModel(new ProdutoTableModel(produtos));
+        TbProduto.repaint();        // TODO add your handling code here:
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void txtConsultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtConsultaMouseClicked
@@ -263,6 +297,7 @@ public class FormProduto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TbProduto;
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
@@ -270,7 +305,6 @@ public class FormProduto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblIcone;
     private javax.swing.JTextField txtConsulta;
     // End of variables declaration//GEN-END:variables
