@@ -261,5 +261,25 @@ public class ProdutoDAO
     
     
     }
+      public void alterar(Produto p) 
+     {
+         try
+         {
+             PreparedStatement ppStmt = conn.prepareStatement( "UPDATE produto set prDescricaoProduto = ? prEstoque = ? ,prObservacao = ?,prPrecoVenda = ?, prLocal = ?, gpIdGrupoProduto = ? WHERE prIdProduto = ?");           
+             ppStmt.setString(1, p.getDescricaoProduto());
+             ppStmt.setInt(2, p.getEstoque());
+             ppStmt.setString(3, p.getObservacao());
+             ppStmt.setDouble(4, p.getPrecoVenda());
+             ppStmt.setString(5, p.getLocal());
+             ppStmt.setInt(6, p.getGrupoProduto().getIdGrupoProduto());
+             //ppStmt.setDate(6, p.getDataCadastro());
+             ppStmt.executeUpdate();
+             
+                     }
+         catch(SQLException e)
+         {
+             e.printStackTrace();
+         }
+     }
      
 }

@@ -154,7 +154,7 @@ public class FormNovaVenda extends javax.swing.JFrame {
         jLabel8.setText("Valor pago:");
 
         btnConsulta.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnConsulta.setText("F1 Consulta Produtos");
+        btnConsulta.setText("Consulta Produtos");
         btnConsulta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConsultaActionPerformed(evt);

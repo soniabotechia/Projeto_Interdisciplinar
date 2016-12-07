@@ -43,6 +43,10 @@ public class ProdutoBO
     {
         produtoDAO.deletar(codigoProduto);
     }
-    
+      public void alterar(Produto p) throws SQLException
+     {
+        produtoDAO.alterar(p);
+     }
+
 }
 

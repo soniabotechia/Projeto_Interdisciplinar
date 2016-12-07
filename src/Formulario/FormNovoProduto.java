@@ -252,7 +252,7 @@ public class FormNovoProduto extends javax.swing.JFrame {
         jTabbedPane1.addTab("Cálculos para Sugestão de Venda", jPanel2);
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jLabel1.setText("CADASTRAR PRODUTO");
+        jLabel1.setText("Cadastrar Produto");
 
         ABAS1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -346,36 +346,35 @@ public class FormNovoProduto extends javax.swing.JFrame {
         ABASLayout.setHorizontalGroup(
             ABASLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ABASLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(ABAS1, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(ABASLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ABASLayout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(19, 19, 19)
+                        .addComponent(ABAS1, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(ABASLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(ABASLayout.createSequentialGroup()
+                                .addGap(67, 67, 67)
+                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(ABASLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(ABASLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(258, 258, 258)
+                        .addComponent(jLabel1)))
                 .addContainerGap(12, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ABASLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(235, 235, 235))
         );
         ABASLayout.setVerticalGroup(
             ABASLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ABASLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(28, 28, 28)
                 .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(ABASLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(ABASLayout.createSequentialGroup()
-                        .addGap(8, 8, 8)
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 227, Short.MAX_VALUE)
                         .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(ABASLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(ABAS1, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(29, Short.MAX_VALUE))
+                    .addComponent(ABAS1, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Dados do Produto", ABAS);
