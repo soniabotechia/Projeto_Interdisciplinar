@@ -24,6 +24,8 @@ public class FormProduto extends javax.swing.JFrame {
 
     // inicializando o callback que enviara o produto para o form alterarProduto
     private CallbackForm<Produto> callbackP;
+    private FormAlterarProduto formAltPro;
+    
     public FormProduto(){
     
         this(null);
@@ -207,23 +209,24 @@ public class FormProduto extends javax.swing.JFrame {
         return new CallbackForm<Produto>(){
             @Override
             public void fim(Produto produto){
-            
+                ProdutoTableModel produtoTableModel = (ProdutoTableModel) TbProduto.getModel();
+                produtoTableModel.fireTableDataChanged();
+                
+                formAltPro.setVisible(false);
+                formAltPro = null;
             }
         };
                 
     
-    }
-    
+    }    
     
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-       
-        
         int row = TbProduto.getSelectedRow();
-        Produto p = ((ProdutoTableModel)TbProduto.getModel()).getValueAt(row);
-        FormAlterarProduto formAltPro = new FormAlterarProduto(this.callbackAlterar());
-        formAltPro.setVisible(true);
-        if(callbackP != null){
-            callbackP.fim(p);
+        
+        if(row > -1) {
+            Produto produto = ((ProdutoTableModel)TbProduto.getModel()).getValueAt(row);
+            formAltPro = new FormAlterarProduto(this.callbackAlterar(), produto);
+            formAltPro.setVisible(true);
         }
         
     }//GEN-LAST:event_btnAlterarActionPerformed

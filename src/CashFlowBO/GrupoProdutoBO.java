@@ -8,6 +8,7 @@ package CashFlowBO;
 import ClashFlowDAO.GrupoProdutoDAO;
 
 import ClashFlowObjeto.GrupoProduto;
+import ClashFlowObjeto.Produto;
 import exception.DAOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -38,5 +39,9 @@ public class GrupoProdutoBO {
     {
         grupoProdutoDAO.deletar(idGrupoProduto);
     }
+    public GrupoProduto buscarPorProduto(Produto produto) {
+        return grupoProdutoDAO.buscarPorProduto(produto);
+    }
+    
     
 }   

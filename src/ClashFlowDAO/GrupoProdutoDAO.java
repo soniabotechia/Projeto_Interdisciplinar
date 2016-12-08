@@ -6,6 +6,7 @@
 package ClashFlowDAO;
 
 import ClashFlowObjeto.GrupoProduto;
+import ClashFlowObjeto.Produto;
 import exception.DAOException;
 
 import java.sql.Connection;
@@ -129,7 +130,60 @@ public class GrupoProdutoDAO {
 			}
 		}
     }
-      public void deletar(int idGrupoProduto) throws SQLException 
+    
+     public GrupoProduto buscarPorProduto(Produto produto)  {
+       
+		try 
+                {
+                        
+			conn = Conexao.conectar();
+			ps = conn.prepareStatement("SELECT G.* FROM GRUPOS_PRODUTOS G INNER JOIN PRODUTOS P ON G.GPIDGRUPOPRODUTO = P.GPIDGRUPOPRODUTO WHERE P.PRIDPRODUTO = ?");
+                        ps.setLong(1, produto.getCodigoProduto());
+                        rs = ps.executeQuery();
+                        
+                        
+                        GrupoProduto grupo = null;
+                 
+                        if(rs.next()) {
+                            grupo = new GrupoProduto();
+                            grupo.setIdGrupoProduto(rs.getInt("gpIdGrupoProduto"));
+                            grupo.setDescricaoGrupo(rs.getString("gpDescricaoGrupo"));
+                            grupo.setDataCadastro(DataUtil.parseDate(rs.getDate("gpDataProduto")));
+                        }
+                       
+                        return grupo;
+                        
+                }
+                catch (SQLException e)
+                {
+                    logger.log(Level.SEVERE, "N\u00e3o foi possivel listar do banco {0}", e.getMessage());
+                    return null;
+                }
+                finally 
+                {
+			if (ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					logger.severe("Nao foi possivel fechar o Statement");
+				}
+			}
+			if (conn != null) 
+                        {
+				try 
+                                {
+					conn.close();
+                                }                                 
+                                catch (SQLException e)
+                                {
+					logger.severe("Não foi possivel fechar a conexao");
+				}
+			}
+		}
+    }
+    
+    
+    public void deletar(int idGrupoProduto) throws SQLException 
     {
         try 
                 {

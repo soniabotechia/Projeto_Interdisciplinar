@@ -5,7 +5,15 @@
  */
 package Formulario;
 
+import CashFlowBO.GrupoProdutoBO;
+import CashFlowBO.ProdutoBO;
+import ClashFlowObjeto.GrupoProduto;
 import ClashFlowObjeto.Produto;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import utilitario.DataUtil;
 
 /**
  *
@@ -14,20 +22,63 @@ import ClashFlowObjeto.Produto;
 public class FormAlterarProduto extends javax.swing.JFrame {
 
     private CallbackForm<Produto> callbackForm; 
+    private Produto produto = null;
+    private GrupoProdutoBO grupoProdutoBO;
+    private ProdutoBO produtoBO;
     
     public FormAlterarProduto(){
-            this(null);
+            this(null, null);
     }
     
-    public FormAlterarProduto(CallbackForm<Produto> callbackForm) {
-        init(callbackForm);
+    public FormAlterarProduto(Produto produto){
+            this(null, produto);
     }
     
-    private void init(CallbackForm<Produto> callbackForm){
+    public FormAlterarProduto(CallbackForm<Produto> callbackForm, Produto produto) {
+        init(callbackForm, produto);
+    }
+    
+    private void init(CallbackForm<Produto> callbackForm, Produto produto){
+        initComponents();
+        carregarGruposProduto();
         this.callbackForm = callbackForm;
+        if(produto != null) {
+            
+            this.produto = produto;
+            GrupoProduto grupo = grupoProdutoBO.buscarPorProduto(produto);
+            produto.setGrupoProduto(grupo);
+            
+            this.txtDescricao.setText(produto.getDescricaoProduto());
+            this.txtObservacao.setText(produto.getObservacao());
+            this.txtQuantidade.setText(String.valueOf(produto.getEstoque()));
+            this.txtPrecoVenda.setText(String.valueOf(produto.getPrecoVenda()));
+            //Esse campo não tem na classe Produto e nem na Tabela Produtos
+            this.txtPrecoCompra.setText("");
+            this.cBGrupoProduto.setSelectedItem(produto.getGrupoProduto());
+            this.txtDataCadastro.setText(DataUtil.formatDate(produto.getDataCadastro()));
+        }
     }
     
-
+    private void carregarGruposProduto() {
+    
+        grupoProdutoBO = new GrupoProdutoBO();
+        List<GrupoProduto> grupos = grupoProdutoBO.buscarTodos();
+        
+        for(GrupoProduto grupo : grupos) {
+            this.cBGrupoProduto.addItem(grupo);
+        }
+        
+    }
+    
+    private CallbackForm<Produto> callbackForm(){
+            return new CallbackForm<Produto>(){
+                @Override
+                public void fim(Produto p){
+                    
+                }
+            };
+    
+    } 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -193,8 +244,6 @@ public class FormAlterarProduto extends javax.swing.JFrame {
         jLabel2.setText("ALTERAR PRODUTO");
 
         ABAS3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        cBGrupoProduto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Acessórios", "Eletrônicos", "Material Escolar", " " }));
         ABAS3.add(cBGrupoProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, 120, 20));
 
         txtObservacao.setText("2GB");
@@ -502,9 +551,29 @@ public class FormAlterarProduto extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-       
+                   
+        produtoBO = new ProdutoBO();
         
+        try {
+            
+            produto.setDescricaoProduto(txtDescricao.getText());
+            produto.setObservacao(txtObservacao.getText());
+            produto.setEstoque(Integer.parseInt(txtQuantidade.getText()));
+            produto.setPrecoVenda(Double.parseDouble(txtPrecoVenda.getText()));
+            produto.setGrupoProduto((GrupoProduto)cBGrupoProduto.getSelectedItem());
+            produtoBO.alterar(produto);
+            
+            if(callbackForm != null) {
+                callbackForm.fim(produto);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(FormAlterarProduto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                    
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     /**
@@ -550,7 +619,7 @@ public class FormAlterarProduto extends javax.swing.JFrame {
     private javax.swing.JPanel ABAS3;
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnMaisGrupoProduto;
-    private javax.swing.JComboBox<String> cBGrupoProduto;
+    private javax.swing.JComboBox<GrupoProduto> cBGrupoProduto;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton5;

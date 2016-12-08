@@ -75,5 +75,11 @@ public class ProdutoTableModel extends AbstractTableModel {
     public Produto getValueAt(int rowIndex) {
         return produtos.get(rowIndex);
     }
+
+    public List<Produto> getProdutos() {
+        return produtos;
+    }
+    
+    
     
 }
