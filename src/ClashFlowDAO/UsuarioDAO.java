@@ -66,15 +66,20 @@ public class UsuarioDAO {
                 {
                         // String date = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime());
 			conn = new Conexao().conectar();
-			ps = conn.prepareStatement( "INSERT INTO USUARIO (usuNome, usuSenha, usuStatus, usuAtivo) VALUES(?,?,?,?)");
+			ps = conn.prepareStatement( "INSERT INTO USUARIO (usuNome, usuSenha, usuStatus, usuAtivo) VALUES(?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
                
                         ps.setString(1, usuario.getUsuario());
                         ps.setString(2, usuario.getSenha());
                         ps.setString(3, usuario.getStatus());
                         ps.setString(4, usuario.getAtivo());
                         ps.execute();
+                         rs = ps.getGeneratedKeys();
+                        
+                        if (rs.next()) {
+                            usuario.setIdusuario(rs.getInt(1));
+                        } 
                        
-                        JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
+                        
                 }
                 catch (SQLException e)
                 {
@@ -113,14 +118,15 @@ public class UsuarioDAO {
 			conn = new Conexao().conectar();
 			st = conn.createStatement();
                
-                        rs = st.executeQuery("SELECT * FROM USUARIOS");
+                        rs = st.executeQuery("SELECT * FROM USUARIO");
                         
                         List<Usuario> usuarios = new ArrayList<>();
                  
                         while(rs.next()) {
                             Usuario usuario = new Usuario();
-                            usuario.setUsuario(rs.getString("usNome"));
-                            usuario.setSenha(rs.getString("usSenha"));
+                            usuario.setIdusuario(rs.getInt("UsuIdUsuario"));
+                            usuario.setUsuario(rs.getString("usuNome"));
+                            usuario.setSenha(rs.getString("usuSenha"));
                             
                             usuarios.add(usuario);
                         }
