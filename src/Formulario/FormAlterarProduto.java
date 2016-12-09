@@ -52,7 +52,7 @@ public class FormAlterarProduto extends javax.swing.JFrame {
             this.txtObservacao.setText(produto.getObservacao());
             this.txtQuantidade.setText(String.valueOf(produto.getEstoque()));
             this.txtPrecoVenda.setText(String.valueOf(produto.getPrecoVenda()));
-            //Esse campo não tem na classe Produto e nem na Tabela Produtos
+            //Esse campo não tem na classe Produto e nem na Tabela Produtos, falha a ser corrigida
             this.txtPrecoCompra.setText("");
             this.cBGrupoProduto.setSelectedItem(produto.getGrupoProduto());
             this.txtDataCadastro.setText(DataUtil.formatDate(produto.getDataCadastro()));
@@ -304,7 +304,6 @@ public class FormAlterarProduto extends javax.swing.JFrame {
         jLabel27.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel27.setText("Dada de Cadastro:");
 
-        txtDataCadastro.setText("13/10/2016");
         txtDataCadastro.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout ABAS2Layout = new javax.swing.GroupLayout(ABAS2);
@@ -315,27 +314,27 @@ public class FormAlterarProduto extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(ABAS2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ABAS2Layout.createSequentialGroup()
-                        .addGroup(ABAS2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnAlterar)
+                        .addGap(209, 209, 209))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ABAS2Layout.createSequentialGroup()
+                        .addGroup(ABAS2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(ABAS2Layout.createSequentialGroup()
+                                .addComponent(ABAS3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(50, 50, 50)
+                                .addComponent(jLabel27)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtDataCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(ABAS2Layout.createSequentialGroup()
                                 .addGap(250, 250, 250)
-                                .addComponent(jLabel2))
-                            .addGroup(ABAS2Layout.createSequentialGroup()
-                                .addGap(31, 31, 31)
-                                .addComponent(jLabel15)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtPrecoCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(36, 36, 36)
-                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(92, 92, 92))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ABAS2Layout.createSequentialGroup()
-                        .addComponent(btnAlterar)
-                        .addGap(209, 209, 209))))
+                                .addComponent(jLabel2)
+                                .addGap(36, 36, 36)
+                                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(92, 92, 92))))
             .addGroup(ABAS2Layout.createSequentialGroup()
-                .addComponent(ABAS3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
-                .addComponent(jLabel27)
+                .addContainerGap()
+                .addComponent(jLabel15)
                 .addGap(18, 18, 18)
-                .addComponent(txtDataCadastro)
+                .addComponent(txtPrecoCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         ABAS2Layout.setVerticalGroup(
@@ -353,13 +352,16 @@ public class FormAlterarProduto extends javax.swing.JFrame {
                     .addGroup(ABAS2Layout.createSequentialGroup()
                         .addGap(108, 108, 108)
                         .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(43, 43, 43)
-                .addGroup(ABAS2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPrecoCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(82, 82, 82)
                 .addComponent(btnAlterar)
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addGroup(ABAS2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ABAS2Layout.createSequentialGroup()
+                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ABAS2Layout.createSequentialGroup()
+                        .addComponent(txtPrecoCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(19, 19, 19))))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -571,7 +573,7 @@ public class FormAlterarProduto extends javax.swing.JFrame {
             }
             
         } catch (SQLException ex) {
-            Logger.getLogger(FormAlterarProduto.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FormAlterarProduto.class.getName()).log(Level.SEVERE, "Produto nao foi alterado", ex);
         }
                     
     }//GEN-LAST:event_btnAlterarActionPerformed
