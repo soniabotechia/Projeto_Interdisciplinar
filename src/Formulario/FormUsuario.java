@@ -5,6 +5,13 @@
  */
 package Formulario;
 
+import CashFlowBO.FormaPagamentoBO;
+import CashFlowBO.UsuarioBO;
+import ClashFlowObjeto.FormaPagamento;
+import ClashFlowObjeto.Usuario;
+import java.util.List;
+import view.UsuarioModel;
+
 /**
  *
  * @author Italo
@@ -34,7 +41,7 @@ public class FormUsuario extends javax.swing.JFrame {
         txtPesquisar = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblUsuario = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -77,7 +84,8 @@ public class FormUsuario extends javax.swing.JFrame {
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/1476299144_search.png"))); // NOI18N
         jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jScrollPane1.setViewportView(jTable1);
+        tblUsuario.setModel(new UsuarioModel(getUsuario()));
+        jScrollPane1.setViewportView(tblUsuario);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -134,6 +142,11 @@ public class FormUsuario extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnNovoActionPerformed
 
+     private List<Usuario> getUsuario() {
+    
+        UsuarioBO usuarioBO = new UsuarioBO();
+        return usuarioBO.buscarTodos();
+     }
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         FormAlterarProduto formAltPro = new FormAlterarProduto();
         formAltPro.setVisible(true);
@@ -185,7 +198,7 @@ public class FormUsuario extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblUsuario;
     private javax.swing.JTextField txtPesquisar;
     // End of variables declaration//GEN-END:variables
 }
