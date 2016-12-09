@@ -319,6 +319,7 @@ public class FormNovaVenda extends javax.swing.JFrame {
     }     
    
     private void btnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirActionPerformed
+                
         if(txtQuantidadeProduto.getText().isEmpty())
         {
             JOptionPane.showMessageDialog(null, "Insira a quantidade de produtos!");
