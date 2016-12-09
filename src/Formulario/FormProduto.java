@@ -228,6 +228,10 @@ public class FormProduto extends javax.swing.JFrame {
             formAltPro = new FormAlterarProduto(this.callbackAlterar(), produto);
             formAltPro.setVisible(true);
         }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Selecione um produto!");
+        }
         
     }//GEN-LAST:event_btnAlterarActionPerformed
 
