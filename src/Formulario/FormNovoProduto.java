@@ -246,7 +246,7 @@ public class FormNovoProduto extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
                     .addComponent(txtPrecoSugerido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Cálculos para Sugestão de Venda", jPanel2);
@@ -264,6 +264,12 @@ public class FormNovoProduto extends javax.swing.JFrame {
         });
         ABAS1.add(CBGrupoProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 120, 20));
         ABAS1.add(txtPrecoCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, 80, -1));
+
+        txtQuantidadeProduto.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtQuantidadeProdutoFocusLost(evt);
+            }
+        });
         ABAS1.add(txtQuantidadeProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 150, 20));
         ABAS1.add(txtObservacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 250, -1));
 
@@ -360,7 +366,7 @@ public class FormNovoProduto extends javax.swing.JFrame {
                     .addGroup(ABASLayout.createSequentialGroup()
                         .addGap(258, 258, 258)
                         .addComponent(jLabel1)))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         ABASLayout.setVerticalGroup(
             ABASLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -383,16 +389,11 @@ public class FormNovoProduto extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 20, Short.MAX_VALUE)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 719, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 739, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane1)
-                .addContainerGap())
+            .addComponent(jTabbedPane1)
         );
 
         pack();
@@ -507,6 +508,11 @@ public class FormNovoProduto extends javax.swing.JFrame {
        txtPrecoVenda.setText(PrecoSugerido);
      
     }//GEN-LAST:event_btnCalcularActionPerformed
+
+    private void txtQuantidadeProdutoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtQuantidadeProdutoFocusLost
+        // TODO add your handling code here:
+        txtEstoque.setText(txtQuantidadeProduto.getText());
+    }//GEN-LAST:event_txtQuantidadeProdutoFocusLost
 
     private GrupoProduto[] carregaGrupos() {
         GrupoProdutoBO grupoProdutoBO = new GrupoProdutoBO();
