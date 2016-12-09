@@ -320,6 +320,8 @@
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="txtTroco">
       <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="null" type="code"/>
         </Property>
@@ -333,6 +335,8 @@
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="txtValorTotal">
       <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="null" type="code"/>
         </Property>
@@ -347,6 +351,7 @@
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="txtValorPago">
       <Properties>
+        <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="null" type="code"/>
         </Property>

@@ -13,12 +13,17 @@ import ClashFlowObjeto.LancamentosCaixa;
 import ClashFlowObjeto.TipoMovimento;
 import exception.CaixaFechadoException;
 import exception.DAOException;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.text.NumberFormatter;
 
 /**
  *
@@ -26,8 +31,9 @@ import javax.swing.JOptionPane;
  */
 public class FormNovoLancamentosCaixa extends javax.swing.JFrame {
     
-     private CallbackForm<LancamentosCaixa> callbackForm;
-     
+    private CallbackForm<LancamentosCaixa> callbackForm;
+    private FormNovaFormaPagamento formNovaFormaPagamento;
+    private FormNovoTipoMovimento formNovoTipoMovimento;
      public FormNovoLancamentosCaixa()
     {
         this(null);
@@ -58,7 +64,6 @@ public class FormNovoLancamentosCaixa extends javax.swing.JFrame {
         txtobservacao = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtValorLancamento = new javax.swing.JTextField();
         cbNovoMovimento = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         btnSalvarNovoLancamento = new javax.swing.JButton();
@@ -66,6 +71,7 @@ public class FormNovoLancamentosCaixa extends javax.swing.JFrame {
         btnAdicionaTipoMovimento = new javax.swing.JButton();
         btnAdicionaTipoPagamento = new javax.swing.JButton();
         labelError = new javax.swing.JLabel();
+        txtValorLancamento = new JFormattedTextField(getFormatoMoeda());
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -92,9 +98,6 @@ public class FormNovoLancamentosCaixa extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setText("Valor do Movimento:");
-
-        txtValorLancamento.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        txtValorLancamento.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         cbNovoMovimento.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         cbNovoMovimento.setModel(new javax.swing.DefaultComboBoxModel<TipoMovimento>(carregaMovimentos()));
@@ -141,6 +144,10 @@ public class FormNovoLancamentosCaixa extends javax.swing.JFrame {
             }
         });
 
+        txtValorLancamento.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtValorLancamento.setText(null);
+        txtValorLancamento.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -152,12 +159,17 @@ public class FormNovoLancamentosCaixa extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(49, 49, 49)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(43, 43, 43)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -170,15 +182,14 @@ public class FormNovoLancamentosCaixa extends javax.swing.JFrame {
                                     .addComponent(cbNovoMovimento, javax.swing.GroupLayout.Alignment.LEADING, 0, 211, Short.MAX_VALUE)
                                     .addComponent(CBFormaPagamento, javax.swing.GroupLayout.Alignment.LEADING, 0, 211, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnAdicionaTipoPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnAdicionaTipoMovimento, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnAdicionaTipoMovimento, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnAdicionaTipoPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                        .addGap(3, 3, 3))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(72, 72, 72)
                         .addComponent(btnSalvarNovoLancamento, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(104, 104, 104)
                         .addComponent(labelError, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -203,13 +214,13 @@ public class FormNovoLancamentosCaixa extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtValorLancamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnAdicionaTipoPagamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(CBFormaPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnAdicionaTipoPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                        .addComponent(CBFormaPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvarNovoLancamento, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -372,10 +383,20 @@ public class FormNovoLancamentosCaixa extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel labelError;
-    private javax.swing.JTextField txtValorLancamento;
+    private javax.swing.JFormattedTextField txtValorLancamento;
     private javax.swing.JTextField txtobservacao;
     // End of variables declaration//GEN-END:variables
 
-    private FormNovaFormaPagamento formNovaFormaPagamento;
-    private FormNovoTipoMovimento formNovoTipoMovimento;
+    private NumberFormatter getFormatoMoeda() {
+        Locale locale = new Locale("pt", "BR");
+        
+        DecimalFormatSymbols dfs = new DecimalFormatSymbols(locale);
+        dfs.setDecimalSeparator(',');
+        DecimalFormat decimalFormat = new DecimalFormat(".##", dfs);
+        NumberFormatter numberFormat = new NumberFormatter(decimalFormat);
+        numberFormat.setFormat(decimalFormat);
+        numberFormat.setAllowsInvalid(false);
+        return numberFormat;
+    }
+
 }

@@ -162,12 +162,17 @@ public class FormNovaVenda extends javax.swing.JFrame {
             }
         });
 
+        txtTroco.setEditable(false);
+        txtTroco.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtTroco.setText(null);
         txtTroco.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
 
+        txtValorTotal.setEditable(false);
+        txtValorTotal.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtValorTotal.setText(null);
         txtValorTotal.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
 
+        txtValorPago.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtValorPago.setText(null);
         txtValorPago.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         txtValorPago.addFocusListener(new java.awt.event.FocusAdapter() {
